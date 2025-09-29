@@ -28,18 +28,193 @@
       gap: 20px;
       padding: 20px;
     }
+    
+    /* Layout especial para Top 3 */
+    .top3-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      grid-template-areas: "top2 top1 top3";
+      gap: 20px;
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: flex-end;
+    }
+    
+    /* Responsividade para telas menores */
+    @media (max-width: 768px) {
+      .top3-container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+          "top1"
+          "top2" 
+          "top3";
+        gap: 30px;
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .top3-container {
+        padding: 20px 10px;
+        gap: 20px;
+      }
+    }
+    
     .card {
       background-color: rgba(255,255,255,0.05);
       border-radius: 10px;
       padding: 15px;
       width: 180px;
       text-align: center;
+      transition: all 0.3s ease;
     }
-    .card img {
+    
+    /* Posicionamento específico dos tops */
+    .card.top1 {
+      grid-area: top1;
       width: 100%;
-      height: 200px;
-      object-fit: cover;
+      max-width: 200px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(0,191,255,0.2), rgba(30,144,255,0.2));
+      border: 3px solid #00bfff;
+      box-shadow: 0 0 30px rgba(0,191,255,0.8);
+      animation: pulseNeon 2s infinite;
+      position: relative;
+      margin: 0 auto;
     }
+    
+    .card.top1::before {
+      content: "👑";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      animation: bounce 1s infinite;
+    }
+    
+    .card.top2 {
+      grid-area: top2;
+      background: linear-gradient(135deg, rgba(192,192,192,0.2), rgba(169,169,169,0.2));
+      border: 2px solid silver;
+      box-shadow: 0 0 20px rgba(192,192,192,0.3);
+      width: 100%;
+      max-width: 180px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    
+    .card.top3 {
+      grid-area: top3;
+      background: linear-gradient(135deg, rgba(205,127,50,0.2), rgba(184,115,51,0.2));
+      border: 2px solid #cd7f32;
+      box-shadow: 0 0 20px rgba(205,127,50,0.3);
+      width: 100%;
+      max-width: 180px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    
+    .card img {
+       width: 100%;
+       height: 180px;
+       object-fit: cover;
+       border-radius: 8px;
+     }
+     
+     .card.top1 img {
+       height: 200px;
+       border: 3px solid #00bfff;
+       box-shadow: 0 0 15px rgba(0,191,255,0.6);
+     }
+     
+     .card.top2 img {
+       height: 180px;
+       border: 3px solid silver;
+       box-shadow: 0 0 15px rgba(192,192,192,0.4);
+     }
+     
+     .card.top3 img {
+       height: 180px;
+       border: 3px solid #cd7f32;
+       box-shadow: 0 0 15px rgba(205,127,50,0.4);
+     }
+    
+    /* Animações especiais */
+    @keyframes pulseNeon {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,191,255,0.8); }
+      50% { box-shadow: 0 0 50px rgba(0,191,255,1); }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+    
+    /* Estilos para posições */
+     .card {
+       position: relative;
+     }
+     
+     .card .position-badge {
+       position: absolute;
+       top: 10px;
+       right: 10px;
+       background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+       color: white;
+       border-radius: 50%;
+       width: 35px;
+       height: 35px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-weight: bold;
+       font-size: 16px;
+       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+       z-index: 10;
+     }
+     
+     .card.top1 .position-badge {
+       background: linear-gradient(45deg, #00bfff, #1e90ff);
+       width: 40px;
+       height: 40px;
+       font-size: 18px;
+       top: 15px;
+       right: 15px;
+     }
+     
+     .card.top2 .position-badge {
+       background: linear-gradient(45deg, #c0c0c0, #a9a9a9);
+       top: 10px;
+       right: 10px;
+     }
+     
+     .card.top3 .position-badge {
+       background: linear-gradient(45deg, #cd7f32, #b8733b);
+       top: 10px;
+       right: 10px;
+     }
+     
+     /* Responsividade para badges */
+     @media (max-width: 480px) {
+       .card .position-badge {
+         width: 30px;
+         height: 30px;
+         font-size: 14px;
+         top: 8px;
+         right: 8px;
+       }
+       
+       .card.top1 .position-badge {
+         width: 35px;
+         height: 35px;
+         font-size: 16px;
+         top: 12px;
+         right: 12px;
+       }
+     }
     .team-layout {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -332,7 +507,7 @@
       const nome = d["Consultores"];
       const total = d["TOTAL GERAL"];
       const nomeImg = normalizarNome(nome);
-      const posTag = pos ? `<div><strong>${pos}º Lugar</strong></div>` : '';
+      const posTag = `<div class="position-badge">${pos}</div>`;
       const className = pos === 1 ? 'top1' : pos === 2 ? 'top2' : 'top3';
       return `<div class="card ${className}">${posTag}<img src="imagens/${nomeImg}.png"><div class="nome">${nome}</div><div class="total">Total: ${total}</div></div>`;
     }
@@ -372,9 +547,10 @@
       const externos = dados.filter(d => d["Tipo"] === "Externo").sort((a,b) => b["TOTAL GERAL"] - a["TOTAL GERAL"]);
 
       document.getElementById("top3Interno").innerHTML = internos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
+      document.getElementById("top3Interno").className = "top3-container";
       document.getElementById("tabelaTop3Interno").innerHTML = internos.slice(0, 3).map(criarLinha).join('');
       document.getElementById("top3Externo").innerHTML = externos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
-      document.getElementById("tabelaTop3Externo").innerHTML = externos.slice(0, 3).map(criarLinha).join('');
+      document.getElementById("top3Externo").className = "top3-container";
 
       const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
       const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
