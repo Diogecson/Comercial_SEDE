@@ -384,6 +384,64 @@
       font-size: 32px;
       font-weight: bold;
     }
+    
+    /* Botões de navegação */
+    .nav-controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav-btn {
+      background: linear-gradient(135deg, #00bfff, #1e90ff);
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+    }
+    
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
+    }
+    
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+    
+    .nav-btn.pause {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+    
+    .nav-btn.pause:hover {
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+    }
+    
+    .slide-indicator {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
   </style>
 
   <button onclick="habilitarAudio()" style="position: fixed; top: 10px; left: 30%; transform: translateX(-50%); z-index: 10000; background-color: cyan; color: black; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
@@ -496,6 +554,16 @@
   </div>
   <div class="slide" id="slide9"><h1>Ranking Geral</h1><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="rankingTable"></tbody></table></div>
 
+  <!-- Controles de navegação -->
+  <div class="nav-controls">
+    <button class="nav-btn" onclick="anteriorSlide()">◀ Anterior</button>
+    <div class="slide-indicator">
+      <span id="slideAtualIndicador">1</span> / 9
+    </div>
+    <button class="nav-btn" onclick="proximoSlide()">Próximo ▶</button>
+    <button class="nav-btn pause" id="pauseBtn" onclick="togglePause()">⏸ Pausar</button>
+  </div>
+
   <script>
     const vendasAnteriores = {};
 
@@ -575,12 +643,58 @@
     }
 
     let slideAtual = 1;
-    function alternarSlide() {
+    let autoPlay = true;
+    let intervalId;
+
+    function atualizarIndicador() {
+      document.getElementById("slideAtualIndicador").textContent = slideAtual;
+    }
+
+    function mostrarSlide(numero) {
       for (let i = 1; i <= 9; i++) {
-        document.getElementById("slide" + i).style.display = (i === slideAtual ? "block" : "none");
+        document.getElementById("slide" + i).style.display = (i === numero ? "block" : "none");
       }
-      slideAtual = (slideAtual % 9) + 1;
-      setTimeout(alternarSlide, 10000);
+      slideAtual = numero;
+      atualizarIndicador();
+    }
+
+    function proximoSlide() {
+      const proximo = (slideAtual % 9) + 1;
+      mostrarSlide(proximo);
+    }
+
+    function anteriorSlide() {
+      const anterior = slideAtual === 1 ? 9 : slideAtual - 1;
+      mostrarSlide(anterior);
+    }
+
+    function togglePause() {
+      const btn = document.getElementById("pauseBtn");
+      if (autoPlay) {
+        autoPlay = false;
+        clearInterval(intervalId);
+        btn.innerHTML = "▶ Continuar";
+        btn.style.background = "linear-gradient(135deg, #28a745, #20c997)";
+      } else {
+        autoPlay = true;
+        iniciarAutoPlay();
+        btn.innerHTML = "⏸ Pausar";
+        btn.style.background = "linear-gradient(135deg, #ff6b6b, #ee5a24)";
+      }
+    }
+
+    function iniciarAutoPlay() {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (autoPlay) {
+          proximoSlide();
+        }
+      }, 10000);
+    }
+
+    function alternarSlide() {
+      mostrarSlide(1);
+      iniciarAutoPlay();
     }
 
     window.onload = () => {
@@ -588,6 +702,31 @@
       setInterval(carregarTudo, 30000);
       alternarSlide();
     }
+
+    // Controle por teclado
+    document.addEventListener('keydown', function(event) {
+      switch(event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          anteriorSlide();
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          proximoSlide();
+          break;
+        case ' ':
+        case 'Spacebar':
+          event.preventDefault();
+          togglePause();
+          break;
+        case 'Escape':
+          event.preventDefault();
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          }
+          break;
+      }
+    });
 
     function habilitarAudio() {
       const audio = document.getElementById("aplausos");
