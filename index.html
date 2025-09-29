@@ -442,6 +442,23 @@
       align-items: center;
       gap: 5px;
     }
+    
+    /* Ocultar controles em tela cheia */
+    :fullscreen .nav-controls {
+      display: none;
+    }
+    
+    :-webkit-full-screen .nav-controls {
+      display: none;
+    }
+    
+    :-moz-full-screen .nav-controls {
+      display: none;
+    }
+    
+    :-ms-fullscreen .nav-controls {
+      display: none;
+    }
   </style>
 
   <button onclick="habilitarAudio()" style="position: fixed; top: 10px; left: 30%; transform: translateX(-50%); z-index: 10000; background-color: cyan; color: black; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
