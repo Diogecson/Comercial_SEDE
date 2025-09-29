@@ -551,6 +551,7 @@
       document.getElementById("tabelaTop3Interno").innerHTML = internos.slice(0, 3).map(criarLinha).join('');
       document.getElementById("top3Externo").innerHTML = externos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
       document.getElementById("top3Externo").className = "top3-container";
+      document.getElementById("tabelaTop3Externo").innerHTML = externos.slice(0, 3).map(criarLinha).join('');
 
       const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
       const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
