@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ranking Corrigido</title>
@@ -28,8 +26,6 @@
       gap: 20px;
       padding: 20px;
     }
-    
-    /* Layout especial para Top 3 */
     .top3-container {
       display: grid;
       grid-template-columns: 1fr 1.2fr 1fr;
@@ -40,8 +36,6 @@
       margin: 0 auto;
       align-items: flex-end;
     }
-    
-    /* Responsividade para telas menores */
     @media (max-width: 768px) {
       .top3-container {
         grid-template-columns: 1fr;
@@ -53,14 +47,12 @@
         align-items: center;
       }
     }
-    
     @media (max-width: 480px) {
       .top3-container {
         padding: 20px 10px;
         gap: 20px;
       }
     }
-    
     .card {
       background-color: rgba(255,255,255,0.05);
       border-radius: 10px;
@@ -68,9 +60,8 @@
       width: 180px;
       text-align: center;
       transition: all 0.3s ease;
+      position: relative;
     }
-    
-    /* Posicionamento específico dos tops */
     .card.top1 {
       grid-area: top1;
       width: 100%;
@@ -80,10 +71,8 @@
       border: 3px solid #00bfff;
       box-shadow: 0 0 30px rgba(0,191,255,0.8);
       animation: pulseNeon 2s infinite;
-      position: relative;
       margin: 0 auto;
     }
-    
     .card.top1::before {
       content: "👑";
       position: absolute;
@@ -93,7 +82,6 @@
       font-size: 30px;
       animation: bounce 1s infinite;
     }
-    
     .card.top2 {
       grid-area: top2;
       background: linear-gradient(135deg, rgba(192,192,192,0.2), rgba(169,169,169,0.2));
@@ -104,7 +92,6 @@
       padding: 15px;
       margin: 0 auto;
     }
-    
     .card.top3 {
       grid-area: top3;
       background: linear-gradient(135deg, rgba(205,127,50,0.2), rgba(184,115,51,0.2));
@@ -115,249 +102,86 @@
       padding: 15px;
       margin: 0 auto;
     }
-    
     .card img {
-       width: 100%;
-       height: 180px;
-       object-fit: cover;
-       border-radius: 8px;
-     }
-     
-     .card.top1 img {
-       height: 200px;
-       border: 3px solid #00bfff;
-       box-shadow: 0 0 15px rgba(0,191,255,0.6);
-     }
-     
-     .card.top2 img {
-       height: 180px;
-       border: 3px solid silver;
-       box-shadow: 0 0 15px rgba(192,192,192,0.4);
-     }
-     
-     .card.top3 img {
-       height: 180px;
-       border: 3px solid #cd7f32;
-       box-shadow: 0 0 15px rgba(205,127,50,0.4);
-     }
-    
-    /* Animações especiais */
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card.top1 img {
+      height: 200px;
+      border: 3px solid #00bfff;
+      box-shadow: 0 0 15px rgba(0,191,255,0.6);
+    }
+    .card.top2 img {
+      height: 180px;
+      border: 3px solid silver;
+      box-shadow: 0 0 15px rgba(192,192,192,0.4);
+    }
+    .card.top3 img {
+      height: 180px;
+      border: 3px solid #cd7f32;
+      box-shadow: 0 0 15px rgba(205,127,50,0.4);
+    }
     @keyframes pulseNeon {
       0%, 100% { box-shadow: 0 0 30px rgba(0,191,255,0.8); }
       50% { box-shadow: 0 0 50px rgba(0,191,255,1); }
     }
-    
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
       40% { transform: translateX(-50%) translateY(-10px); }
       60% { transform: translateX(-50%) translateY(-5px); }
     }
-    
-    /* Estilos para posições */
-     .card {
-       position: relative;
-     }
-     
-     .card .position-badge {
-       position: absolute;
-       top: 10px;
-       right: 10px;
-       background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-       color: white;
-       border-radius: 50%;
-       width: 35px;
-       height: 35px;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       font-weight: bold;
-       font-size: 16px;
-       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-       z-index: 10;
-     }
-     
-     .card.top1 .position-badge {
-       background: linear-gradient(45deg, #00bfff, #1e90ff);
-       width: 40px;
-       height: 40px;
-       font-size: 18px;
-       top: 15px;
-       right: 15px;
-     }
-     
-     .card.top2 .position-badge {
-       background: linear-gradient(45deg, #c0c0c0, #a9a9a9);
-       top: 10px;
-       right: 10px;
-     }
-     
-     .card.top3 .position-badge {
-       background: linear-gradient(45deg, #cd7f32, #b8733b);
-       top: 10px;
-       right: 10px;
-     }
-     
-     /* Responsividade para badges */
-     @media (max-width: 480px) {
-       .card .position-badge {
-         width: 30px;
-         height: 30px;
-         font-size: 14px;
-         top: 8px;
-         right: 8px;
-       }
-       
-       .card.top1 .position-badge {
-         width: 35px;
-         height: 35px;
-         font-size: 16px;
-         top: 12px;
-         right: 12px;
-       }
-     }
-    .team-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 15px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 15px;
-      }
-     .team-section {
-       background: rgba(255,255,255,0.03);
-       border-radius: 12px;
-       padding: 15px;
-       opacity: 0;
-       transform: translateY(30px);
-       animation: fadeInUp 0.8s ease forwards;
-     }
-     .team-section:nth-child(1) { animation-delay: 0.2s; }
-      .team-section:nth-child(2) { animation-delay: 0.4s; }
-      .team-section:nth-child(3) { animation-delay: 0.6s; }
-      .team-section:nth-child(4) { animation-delay: 0.8s; }
-      .team-section:nth-child(5) { animation-delay: 1.0s; }
-     .team-title {
-       font-size: 20px;
-       color: cyan;
-       margin-bottom: 15px;
-       font-weight: bold;
-       text-align: center;
-       text-shadow: 0 0 10px rgba(0,255,255,0.5);
-     }
-     .team-grid {
-       display: flex;
-       justify-content: center;
-       flex-wrap: wrap;
-       gap: 12px;
-       align-items: flex-end;
-     }
-     .team-member {
-       background-color: rgba(255,255,255,0.08);
-       border-radius: 10px;
-       padding: 8px;
-       text-align: center;
-       transition: all 0.3s ease;
-       opacity: 0;
-       transform: scale(0.8);
-       animation: popIn 0.6s ease forwards;
-     }
-     .team-member:hover {
-       transform: translateY(-5px) scale(1.05);
-       box-shadow: 0 10px 20px rgba(0,255,255,0.2);
-     }
-     .team-member img {
-       width: 60px;
-       height: 60px;
-       object-fit: cover;
-       border-radius: 50%;
-       border: 2px solid cyan;
-       margin-bottom: 6px;
-       transition: all 0.3s ease;
-     }
-     .team-member:hover img {
-       border-color: #00ffff;
-       box-shadow: 0 0 15px rgba(0,255,255,0.6);
-     }
-     .team-member .nome {
-       font-size: 14px;
-       font-weight: bold;
-       margin-bottom: 3px;
-     }
-     .team-member .cargo {
-       font-size: 11px;
-       color: #aaa;
-     }
-     /* Animações */
-     @keyframes fadeInUp {
-       to {
-         opacity: 1;
-         transform: translateY(0);
-       }
-     }
-     @keyframes popIn {
-       to {
-         opacity: 1;
-         transform: scale(1);
-       }
-     }
-     /* Efeito escadinha com animação */
-     .team-member:nth-child(1) { animation-delay: 0.1s; transform: translateY(0px) scale(0.8); }
-     .team-member:nth-child(2) { animation-delay: 0.2s; transform: translateY(5px) scale(0.8); }
-     .team-member:nth-child(3) { animation-delay: 0.3s; transform: translateY(10px) scale(0.8); }
-     .team-member:nth-child(4) { animation-delay: 0.4s; transform: translateY(15px) scale(0.8); }
-     .team-member:nth-child(5) { animation-delay: 0.5s; transform: translateY(5px) scale(0.8); }
-     .team-member:nth-child(6) { animation-delay: 0.6s; transform: translateY(10px) scale(0.8); }
-     .team-member:nth-child(7) { animation-delay: 0.7s; transform: translateY(15px) scale(0.8); }
-     .team-member:nth-child(8) { animation-delay: 0.8s; transform: translateY(20px) scale(0.8); }
-     .team-member:nth-child(9) { animation-delay: 0.9s; transform: translateY(8px) scale(0.8); }
-     .team-member:nth-child(10) { animation-delay: 1s; transform: translateY(12px) scale(0.8); }
-    .total {
-      font-size: 20px;
-      margin-top: 10px;
-      color: cyan;
-    }
-    .slider-container {
-      overflow: hidden;
-      position: relative;
-      height: 280px;
-    }
-    .slider-track {
+    .card .position-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
       display: flex;
-      animation: scrollSlider 40s linear infinite;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 10;
     }
-    .slider-track img {
-      height: 200px;
-      width: auto;
-      object-fit: cover;
-      border-radius: 10px;
+    .card.top1 .position-badge {
+      background: linear-gradient(45deg, #00bfff, #1e90ff);
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      top: 15px;
+      right: 15px;
     }
-    .slider-track.reverse {
-      animation-direction: reverse;
+    .card.top2 .position-badge {
+      background: linear-gradient(45deg, #c0c0c0, #a9a9a9);
     }
-    .consultor-card {
-      flex: 0 0 auto;
-      width: 220px;
-      margin: 0 15px;
+    .card.top3 .position-badge {
+      background: linear-gradient(45deg, #cd7f32, #b8733b);
     }
-    @keyframes scrollSlider {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    @media (max-width: 480px) {
+      .card .position-badge { width: 30px; height: 30px; font-size: 14px; top: 8px; right: 8px; }
+      .card.top1 .position-badge { width: 35px; height: 35px; font-size: 16px; top: 12px; right: 12px; }
     }
+    .total { font-size: 20px; margin-top: 10px; color: cyan; }
+    .slider-container { overflow: hidden; position: relative; height: 280px; }
+    .slider-track { display: flex; animation: scrollSlider 40s linear infinite; }
+    .slider-track img { height: 200px; width: auto; object-fit: cover; border-radius: 10px; }
+    .slider-track.reverse { animation-direction: reverse; }
+    .consultor-card { flex: 0 0 auto; width: 220px; margin: 0 15px; }
+    @keyframes scrollSlider { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     table {
       width: 85%;
       margin: 20px auto;
       border-collapse: collapse;
       font-size: 15px;
     }
-    th, td {
-      padding: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    thead {
-      background-color: rgba(0, 73, 142, 0.85);
-    }
-
+    th, td { padding: 10px; border: 1px solid rgba(255, 255, 255, 0.2); }
+    thead { background-color: rgba(0, 73, 142, 0.85); }
     .popup {
       display: none;
       position: fixed;
@@ -368,24 +192,9 @@
       z-index: 9999;
       flex-direction: column;
     }
-    .popup img {
-      width: 200px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      object-fit: cover;
-      border: 4px solid cyan;
-    }
-    .popup .msg {
-      font-size: 24px;
-      color: cyan;
-      margin-bottom: 10px;
-    }
-    .popup .nome {
-      font-size: 32px;
-      font-weight: bold;
-    }
-    
-    /* Botões de navegação */
+    .popup img { width: 200px; border-radius: 16px; margin-bottom: 20px; object-fit: cover; border: 4px solid cyan; }
+    .popup .msg { font-size: 24px; color: cyan; margin-bottom: 10px; }
+    .popup .nome { font-size: 32px; font-weight: bold; }
     .nav-controls {
       position: fixed;
       bottom: 20px;
@@ -399,7 +208,6 @@
       border-radius: 25px;
       backdrop-filter: blur(10px);
     }
-    
     .nav-btn {
       background: linear-gradient(135deg, #00bfff, #1e90ff);
       border: none;
@@ -412,60 +220,17 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
     }
-    
-    .nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
-    }
-    
-    .nav-btn:active {
-      transform: translateY(0);
-    }
-    
-    .nav-btn.pause {
-      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-    }
-    
-    .nav-btn.pause:hover {
-      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
-    }
-    
-    .slide-indicator {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 8px 15px;
-      border-radius: 15px;
-      font-size: 12px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    /* Ocultar controles em tela cheia */
-    :fullscreen .nav-controls {
-      display: none;
-    }
-    
-    :-webkit-full-screen .nav-controls {
-      display: none;
-    }
-    
-    :-moz-full-screen .nav-controls {
-      display: none;
-    }
-    
-    :-ms-fullscreen .nav-controls {
-      display: none;
-    }
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,191,255,0.5); }
+    .nav-btn:active { transform: translateY(0); }
+    .nav-btn.pause { background: linear-gradient(135deg, #ff6b6b, #ee5a24); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); }
+    .nav-btn.pause:hover { box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5); }
+    .slide-indicator { background: rgba(255, 255, 255, 0.2); color: white; padding: 8px 15px; border-radius: 15px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+    :fullscreen .nav-controls, :-webkit-full-screen .nav-controls, :-moz-full-screen .nav-controls, :-ms-fullscreen .nav-controls { display: none; }
   </style>
 
   <button onclick="habilitarAudio()" style="position: fixed; top: 10px; left: 30%; transform: translateX(-50%); z-index: 10000; background-color: cyan; color: black; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
     🔊 Ativar Som
   </button>
-  
-  
 </head>
 <body>
   <header>
@@ -481,95 +246,68 @@
 
   <audio id="aplausos" src="https://www.soundjay.com/human/sounds/applause-8.mp3" preload="auto"></audio>
 
-  <div class="slide" id="slide1"><h1>Top 3 Internos</h1><div class="container" id="top3Interno"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="tabelaTop3Interno"></tbody></table></div>
-  <div class="slide" id="slide2"><h1>Top 3 Externos</h1><div class="container" id="top3Externo"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="tabelaTop3Externo"></tbody></table></div>
-  <div class="slide" id="slide3"><h1>Todos os Consultores</h1><div class="slider-container"><div class="slider-track" id="linha1"></div></div><div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div></div>
-  <div class="slide" id="slide4">
-    <h1>Coordenadores</h1>
-    <div class="container">
-      <div class="card">
-        <img src="imagens/tom.png">
-        <div class="nome">Tom</div>
-        <div class="cargo">Coordenador Time Externo</div>
-      </div>
-      <div class="card">
-        <img src="imagens/mary.png">
-        <div class="nome">Mary</div>
-        <div class="cargo">Coordenadora Time Interno</div>
-      </div>
-    </div>
+  <!-- Slides -->
+  <div class="slide" id="slide1">
+    <h1>Top 3 Internos</h1>
+    <div class="container" id="top3Interno"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Consultores</th>
+          <th>Matriculas Presencial</th>
+          <th>Matriculas Ead</th>
+          <th>Matriculas Semi-Presencial</th>
+          <th>Inteligência Artificial</th>
+          <th>Pós-Graduação</th>
+          <th>Total de Matriculas</th>
+          <th>TOTAL GERAL</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaTop3Interno"></tbody>
+    </table>
   </div>
-  <div class="slide" id="slide5">
-    <h1>Supervisores</h1>
-    <div class="container" style="flex-wrap: nowrap; justify-content: center; gap: 10px;">
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/vanessa.png">
-        <div class="nome">Vanessa</div>
-        <div class="cargo">Supervisora</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/raffa.png">
-        <div class="nome">Raffaela</div>
-        <div class="cargo">Supervisora</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/juliana.png">
-        <div class="nome">Juliana</div>
-        <div class="cargo">Supervisora</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/erica.png">
-        <div class="nome">Erica</div>
-        <div class="cargo">Supervisora</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/vanessafaria.png">
-        <div class="nome">Vanessa Faria</div>
-        <div class="cargo">Supervisora</div>
-      </div>      
-    </div>
+
+  <div class="slide" id="slide2">
+    <h1>Top 3 Externos</h1>
+    <div class="container" id="top3Externo"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Consultores</th>
+          <th>Matriculas Presencial</th>
+          <th>Matriculas Ead</th>
+          <th>Matriculas Semi-Presencial</th>
+          <th>Inteligência Artificial</th>
+          <th>Pós-Graduação</th>
+          <th>Total de Matriculas</th>
+          <th>TOTAL GERAL</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaTop3Externo"></tbody>
+    </table>
   </div>
-  <div class="slide" id="slide6">
-    <h1>Automações e IA</h1>
-    <div class="container">
-      <div class="card">
-        <img src="imagens/dg.png">
-        <div class="nome">DG</div>
-        <div class="cargo">Analista de Sistemas</div>
-      </div>
-    </div>
+
+  <div class="slide" id="slide9">
+    <h1>Ranking Geral</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Consultores</th>
+          <th>Matriculas Presencial</th>
+          <th>Matriculas Ead</th>
+          <th>Matriculas Semi-Presencial</th>
+          <th>Inteligência Artificial</th>
+          <th>Pós-Graduação</th>
+          <th>Total de Matriculas</th>
+          <th>TOTAL GERAL</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="rankingTable"></tbody>
+    </table>
   </div>
-  <div class="slide" id="slide7">
-    <h1>B2B</h1>
-    <div class="container">
-      <div class="card">
-        <img src="imagens/inara.png">
-        <div class="nome">Inara</div>
-        <div class="cargo">B2B</div>
-      </div>
-    </div>
-  </div>
-  <div class="slide" id="slide8">
-    <h1>Líderes</h1>
-    <div class="container">
-      <div class="card">
-        <img src="imagens/lidya.png">
-        <div class="nome">Lidya</div>
-        <div class="cargo">Líder Comercial</div>
-      </div>
-      <div class="card">
-        <img src="imagens/pedro.png">
-        <div class="nome">Pedro</div>
-        <div class="cargo">Líder Externo</div>
-      </div>
-      <div class="card">
-        <img src="imagens/beatriz.png">
-        <div class="nome">Beatriz</div>
-        <div class="cargo">Líder Externo</div>
-      </div>
-    </div>
-  </div>
-  <div class="slide" id="slide9"><h1>Ranking Geral</h1><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="rankingTable"></tbody></table></div>
 
   <!-- Controles de navegação -->
   <div class="nav-controls">
@@ -605,23 +343,17 @@
     }
 
     function criarLinha(d) {
-      return `<tr><td>${d["Consultores"]}</td><td>${d["Matriculas Presencial"]}</td><td>${d["Matriculas Ead"]}</td><td>${d["Matriculas Semi-Presencial"]}</td><td>${d["TOTAL GERAL"]}</td></tr>`;
-    }
-
-    function mostrarPopup(nome, total) {
-      const popup = document.getElementById("popup");
-      const img = document.getElementById("popupImg");
-      const msg = document.getElementById("popupMsg");
-      const nomeEl = document.getElementById("popupNome");
-      const nomeImg = normalizarNome(nome);
-
-      img.src = `imagens/${nomeImg}.png`;
-      msg.innerText = `Nova matrícula registrada! Total agora é ${total}`;
-      nomeEl.innerText = nome;
-
-      document.getElementById("aplausos").play();
-      popup.style.display = "flex";
-      setTimeout(() => popup.style.display = "none", 30000);
+      return `<tr>
+        <td>${d["Consultores"]}</td>
+        <td>${d["Matriculas Presencial"]}</td>
+        <td>${d["Matriculas Ead"]}</td>
+        <td>${d["Matriculas Semi-Presencial"]}</td>
+        <td>${d["Inteligencia Artificial"] || 0}</td>
+        <td>${d["Pós-Graduação"] || 0}</td>
+        <td>${d["Total de Matriculas"] || 0}</td>
+        <td>${d["TOTAL GERAL"] || 0}</td>
+        <td>${d["Tipo"]}</td>
+      </tr>`;
     }
 
     async function carregarTudo() {
@@ -632,129 +364,13 @@
       const externos = dados.filter(d => d["Tipo"] === "Externo").sort((a,b) => b["TOTAL GERAL"] - a["TOTAL GERAL"]);
 
       document.getElementById("top3Interno").innerHTML = internos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
-      document.getElementById("top3Interno").className = "top3-container";
       document.getElementById("tabelaTop3Interno").innerHTML = internos.slice(0, 3).map(criarLinha).join('');
       document.getElementById("top3Externo").innerHTML = externos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
-      document.getElementById("top3Externo").className = "top3-container";
       document.getElementById("tabelaTop3Externo").innerHTML = externos.slice(0, 3).map(criarLinha).join('');
-
-      const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
-      const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
-      document.getElementById("linha1").innerHTML = linha1 + linha1;
-      document.getElementById("linha2").innerHTML = linha2 + linha2;
-
-      document.getElementById("rankingTable").innerHTML = [...dados]
-        .sort((a, b) => parseInt(b["TOTAL GERAL"] || 0) - parseInt(a["TOTAL GERAL"] || 0))
-        .map(criarLinha)
-        .join('');
-
-      dados.forEach(d => {
-        const nome = d["Consultores"];
-        const totalAtual = parseInt(d["TOTAL GERAL"]) || 0;
-        const totalAntigo = vendasAnteriores[nome];
-        if (totalAntigo !== undefined && totalAtual > totalAntigo) {
-          mostrarPopup(nome, totalAtual);
-        }
-        vendasAnteriores[nome] = totalAtual;
-      });
+      document.getElementById("rankingTable").innerHTML = dados.sort((a,b) => b["TOTAL GERAL"] - a["TOTAL GERAL"]).map(criarLinha).join('');
     }
 
-    let slideAtual = 1;
-    let autoPlay = true;
-    let intervalId;
-
-    function atualizarIndicador() {
-      document.getElementById("slideAtualIndicador").textContent = slideAtual;
-    }
-
-    function mostrarSlide(numero) {
-      for (let i = 1; i <= 9; i++) {
-        document.getElementById("slide" + i).style.display = (i === numero ? "block" : "none");
-      }
-      slideAtual = numero;
-      atualizarIndicador();
-    }
-
-    function proximoSlide() {
-      const proximo = (slideAtual % 9) + 1;
-      mostrarSlide(proximo);
-    }
-
-    function anteriorSlide() {
-      const anterior = slideAtual === 1 ? 9 : slideAtual - 1;
-      mostrarSlide(anterior);
-    }
-
-    function togglePause() {
-      const btn = document.getElementById("pauseBtn");
-      if (autoPlay) {
-        autoPlay = false;
-        clearInterval(intervalId);
-        btn.innerHTML = "▶ Continuar";
-        btn.style.background = "linear-gradient(135deg, #28a745, #20c997)";
-      } else {
-        autoPlay = true;
-        iniciarAutoPlay();
-        btn.innerHTML = "⏸ Pausar";
-        btn.style.background = "linear-gradient(135deg, #ff6b6b, #ee5a24)";
-      }
-    }
-
-    function iniciarAutoPlay() {
-      if (intervalId) clearInterval(intervalId);
-      intervalId = setInterval(() => {
-        if (autoPlay) {
-          proximoSlide();
-        }
-      }, 10000);
-    }
-
-    function alternarSlide() {
-      mostrarSlide(1);
-      iniciarAutoPlay();
-    }
-
-    window.onload = () => {
-      carregarTudo();
-      setInterval(carregarTudo, 30000);
-      alternarSlide();
-    }
-
-    // Controle por teclado
-    document.addEventListener('keydown', function(event) {
-      switch(event.key) {
-        case 'ArrowLeft':
-          event.preventDefault();
-          anteriorSlide();
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          proximoSlide();
-          break;
-        case ' ':
-        case 'Spacebar':
-          event.preventDefault();
-          togglePause();
-          break;
-        case 'Escape':
-          event.preventDefault();
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          }
-          break;
-      }
-    });
-
-    function habilitarAudio() {
-      const audio = document.getElementById("aplausos");
-      audio.play().then(() => {
-        alert("Som ativado! Agora os aplausos funcionarão.");
-      }).catch(err => {
-        console.log("Erro ao ativar som:", err);
-        alert("O som não pôde ser ativado. Tente clicar novamente.");
-      });
-    }
-
+    carregarTudo();
   </script>
 </body>
 </html>
