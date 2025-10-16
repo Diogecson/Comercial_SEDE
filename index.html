@@ -1,6 +1,3 @@
-nãooo só adicione as novas colunas Consultores	Matriculas Presencial	Matriculas Ead	Matriculas Semi-Presencial	Inteligencia Artificial	Pós-Graduação	Total de Matriculas	TOTAL GERAL	Tipo
-
-edite e adicione neste código :
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -484,8 +481,8 @@ edite e adicione neste código :
 
   <audio id="aplausos" src="https://www.soundjay.com/human/sounds/applause-8.mp3" preload="auto"></audio>
 
-  <div class="slide" id="slide1"><h1>Top 3 Internos</h1><div class="container" id="top3Interno"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="tabelaTop3Interno"></tbody></table></div>
-  <div class="slide" id="slide2"><h1>Top 3 Externos</h1><div class="container" id="top3Externo"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="tabelaTop3Externo"></tbody></table></div>
+  <div class="slide" id="slide1"><h1>Top 3 Internos</h1><div class="container" id="top3Interno"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="tabelaTop3Interno"></tbody></table></div>
+  <div class="slide" id="slide2"><h1>Top 3 Externos</h1><div class="container" id="top3Externo"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="tabelaTop3Externo"></tbody></table></div>
   <div class="slide" id="slide3"><h1>Todos os Consultores</h1><div class="slider-container"><div class="slider-track" id="linha1"></div></div><div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div></div>
   <div class="slide" id="slide4">
     <h1>Coordenadores</h1>
@@ -572,7 +569,7 @@ edite e adicione neste código :
       </div>
     </div>
   </div>
-  <div class="slide" id="slide9"><h1>Ranking Geral</h1><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Total</th></tr></thead><tbody id="rankingTable"></tbody></table></div>
+  <div class="slide" id="slide9"><h1>Ranking Geral</h1><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="rankingTable"></tbody></table></div>
 
   <!-- Controles de navegação -->
   <div class="nav-controls">
@@ -608,7 +605,15 @@ edite e adicione neste código :
     }
 
     function criarLinha(d) {
-      return `<tr><td>${d["Consultores"]}</td><td>${d["Matriculas Presencial"]}</td><td>${d["Matriculas Ead"]}</td><td>${d["Matriculas Semi-Presencial"]}</td><td>${d["TOTAL GERAL"]}</td></tr>`;
+      return `<tr>
+        <td>${d["Consultores"]}</td>
+        <td>${d["Matriculas Presencial"]}</td>
+        <td>${d["Matriculas Ead"]}</td>
+        <td>${d["Matriculas Semi-Presencial"]}</td>
+        <td>${d["Inteligencia Artificial"] || 0}</td>
+        <td>${d["Pós-Graduação"] || 0}</td>
+        <td>${d["TOTAL GERAL"]}</td>
+      </tr>`;
     }
 
     function mostrarPopup(nome, total) {
