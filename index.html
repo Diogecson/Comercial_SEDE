@@ -486,6 +486,20 @@
   <div class="slide" id="slide3">
     <h1>Top 3 EAD Brasil</h1>
     <div class="container" id="top3EadBrasil"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Consultor</th>
+          <th>Presencial</th>
+          <th>EAD</th>
+          <th>Semi</th>
+          <th>Inteligencia Artificial</th>
+          <th>Pós-Graduação</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaTop3EadBrasil"></tbody>
+    </table>
   </div>
   <div class="slide" id="slide4"><h1>Todos os Consultores</h1><div class="slider-container"><div class="slider-track" id="linha1"></div></div><div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div></div>
   <div class="slide" id="slide5">
@@ -660,6 +674,7 @@
         .sort((a,b) => (parseInt(b["Matriculas Ead"]) || 0) - (parseInt(a["Matriculas Ead"]) || 0));
       document.getElementById("top3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map((d,i) => criarCardEad(d, i+1)).join('');
       document.getElementById("top3EadBrasil").className = "top3-container";
+      document.getElementById("tabelaTop3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map(criarLinha).join('');
 
       const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
       const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
