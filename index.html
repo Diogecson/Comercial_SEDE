@@ -612,11 +612,11 @@
 
     function criarCardEad(d, pos) {
       const nome = d["Consultores"];
-      const totalEad = parseInt(d["Matriculas Ead"]) || 0;
+      const total = d["TOTAL GERAL"];
       const nomeImg = normalizarNome(nome);
       const posTag = `<div class="position-badge">${pos}</div>`;
       const className = pos === 1 ? 'top1' : pos === 2 ? 'top2' : 'top3';
-      return `<div class="card ${className}">${posTag}<img src="imagens/${nomeImg}.png"><div class="nome">${nome}</div><div class="total">Total EAD: ${totalEad}</div></div>`;
+      return `<div class="card ${className}">${posTag}<img src="imagens/${nomeImg}.png"><div class="nome">${nome}</div><div class="total">Total: ${total}</div></div>`;
     }
 
     function criarCardSimples(d) {
