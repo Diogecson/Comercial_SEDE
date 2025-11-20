@@ -533,42 +533,32 @@
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/vanessa.png">
         <div class="nome">Vanessa</div>
-        <div class="cargo">Supervisora</div>
+        <div class="cargo">Supervisora - Interno</div>
       </div>
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/raffa.png">
         <div class="nome">Raffaela</div>
-        <div class="cargo">Supervisora</div>
+        <div class="cargo">Supervisora - Interno</div>
       </div>
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/juliana.png">
         <div class="nome">Juliana</div>
-        <div class="cargo">Supervisora</div>
+        <div class="cargo">Supervisora - Interno</div>
       </div>
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/erica.png">
         <div class="nome">Erica</div>
-        <div class="cargo">Supervisora</div>
+        <div class="cargo">Supervisora - Externo</div>
       </div>
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/vanessafaria.png">
         <div class="nome">Vanessa Faria</div>
-        <div class="cargo">Supervisora</div>
+        <div class="cargo">Supervisora - Externo</div>
       </div>      
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/dg.png">
         <div class="nome">DG</div>
-        <div class="cargo">Supervisor</div>
-      </div>
-    </div>
-  </div>
-  <div class="slide" id="slide7">
-    <h1>B2B</h1>
-    <div class="container">
-      <div class="card">
-        <img src="imagens/inara.png">
-        <div class="nome">Inara</div>
-        <div class="cargo">B2B</div>
+        <div class="cargo">Supervisor EAD - BRASIL</div>
       </div>
     </div>
   </div>
@@ -598,7 +588,7 @@
   <div class="nav-controls">
     <button class="nav-btn" onclick="anteriorSlide()">◀ Anterior</button>
     <div class="slide-indicator">
-      <span id="slideAtualIndicador">1</span> / 9
+      <span id="slideAtualIndicador">1</span> / <span id="slideTotalIndicador">9</span>
     </div>
     <button class="nav-btn" onclick="proximoSlide()">Próximo ▶</button>
     <button class="nav-btn pause" id="pauseBtn" onclick="togglePause()">⏸ Pausar</button>
@@ -730,21 +720,24 @@
       document.getElementById("slideAtualIndicador").textContent = slideAtual;
     }
 
+    let totalSlides = 9;
+    let slides = [];
+
     function mostrarSlide(numero) {
-      for (let i = 1; i <= 9; i++) {
-        document.getElementById("slide" + i).style.display = (i === numero ? "block" : "none");
-      }
+      slides.forEach((el, idx) => {
+        el.style.display = (idx === (numero - 1) ? "block" : "none");
+      });
       slideAtual = numero;
       atualizarIndicador();
     }
 
     function proximoSlide() {
-      const proximo = (slideAtual % 9) + 1;
+      const proximo = (slideAtual % totalSlides) + 1;
       mostrarSlide(proximo);
     }
 
     function anteriorSlide() {
-      const anterior = slideAtual === 1 ? 9 : slideAtual - 1;
+      const anterior = slideAtual === 1 ? totalSlides : slideAtual - 1;
       mostrarSlide(anterior);
     }
 
@@ -780,6 +773,10 @@
     window.onload = () => {
       carregarTudo();
       setInterval(carregarTudo, 30000);
+      slides = Array.from(document.querySelectorAll('.slide'));
+      totalSlides = slides.length;
+      const totalEl = document.getElementById('slideTotalIndicador');
+      if (totalEl) totalEl.textContent = totalSlides;
       alternarSlide();
     }
 
