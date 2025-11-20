@@ -358,6 +358,16 @@
       background-color: rgba(0, 73, 142, 0.85);
     }
 
+    .rank-top {
+      background-color: rgba(0, 255, 255, 0.12);
+    }
+    .rank-mid {
+      background-color: rgba(30, 144, 255, 0.10);
+    }
+    .rank-bottom {
+      background-color: rgba(0, 73, 142, 0.08);
+    }
+
     .popup {
       display: none;
       position: fixed;
@@ -638,6 +648,18 @@
       </tr>`;
     }
 
+    function criarLinhaClasse(d, classe) {
+      return `<tr class="${classe}">
+        <td>${d["Consultores"]}</td>
+        <td>${d["Matriculas Presencial"]}</td>
+        <td>${d["Matriculas Ead"]}</td>
+        <td>${d["Matriculas Semi-Presencial"]}</td>
+        <td>${d["Inteligencia Artificial"] || 0}</td>
+        <td>${d["Pós-Graduação"] || 0}</td>
+        <td>${d["TOTAL GERAL"]}</td>
+      </tr>`;
+    }
+
     function mostrarPopup(nome, total) {
       const popup = document.getElementById("popup");
       const img = document.getElementById("popupImg");
@@ -671,7 +693,7 @@
       const eadBrasilNomes = ["Mauricio", "Milza", "Liliane"];
       const eadBrasil = dados
         .filter(d => eadBrasilNomes.includes(d["Consultores"]))
-        .sort((a,b) => (parseInt(b["Matriculas Ead"]) || 0) - (parseInt(a["Matriculas Ead"]) || 0));
+        .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
       document.getElementById("top3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map((d,i) => criarCardEad(d, i+1)).join('');
       document.getElementById("top3EadBrasil").className = "top3-container";
       document.getElementById("tabelaTop3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map(criarLinha).join('');
@@ -681,10 +703,13 @@
       document.getElementById("linha1").innerHTML = linha1 + linha1;
       document.getElementById("linha2").innerHTML = linha2 + linha2;
 
-      document.getElementById("rankingTable").innerHTML = [...dados]
-        .sort((a, b) => parseInt(b["TOTAL GERAL"] || 0) - parseInt(a["TOTAL GERAL"] || 0))
-        .map(criarLinha)
-        .join('');
+      const ranking = [...dados]
+        .sort((a, b) => parseInt(b["TOTAL GERAL"] || 0) - parseInt(a["TOTAL GERAL"] || 0));
+      const linhasRanking = ranking.map((d, i) => {
+        const classe = i < 7 ? "rank-top" : (i < 14 ? "rank-mid" : "rank-bottom");
+        return criarLinhaClasse(d, classe);
+      });
+      document.getElementById("rankingTable").innerHTML = linhasRanking.join('');
 
       dados.forEach(d => {
         const nome = d["Consultores"];
