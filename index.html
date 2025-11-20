@@ -368,6 +368,27 @@
       background-color: rgba(0, 73, 142, 0.08);
     }
 
+    .chart-area { position: relative; width: 100%; max-width: 1100px; margin: 0 auto; }
+    .chart-area canvas { width: 100%; height: clamp(320px, 58vh, 560px); border-radius: 12px; display: block; margin: 0 auto; }
+    @media (max-width: 768px) {
+      .chart-area canvas { height: clamp(280px, 52vh, 520px); }
+    }
+    @media (max-width: 480px) {
+      .chart-area canvas { height: clamp(240px, 48vh, 480px); }
+    }
+    .dot {
+      position: absolute;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #00ffff;
+      box-shadow: 0 0 15px rgba(0,255,255,0.9);
+      animation: blink 1s infinite alternate;
+      transform: translate(-7px, -7px);
+    }
+    @keyframes blink {
+      from { opacity: 0.35; box-shadow: 0 0 8px rgba(0,255,255,0.6); }
+      to   { opacity: 1;   box-shadow: 0 0 18px rgba(0,255,255,1); }
+    }
+
     .popup {
       display: none;
       position: fixed;
@@ -584,6 +605,16 @@
   </div>
   <div class="slide" id="slide9"><h1>Ranking Geral</h1><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="rankingTable"></tbody></table></div>
 
+  <div class="slide" id="slide10">
+    <h1>MATRICULAS MÊS</h1>
+    <div class="container">
+      <div class="chart-area">
+        <canvas id="chartDia"></canvas>
+        <div id="todayDotDia" class="dot"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Controles de navegação -->
   <div class="nav-controls">
     <button class="nav-btn" onclick="anteriorSlide()">◀ Anterior</button>
@@ -650,6 +681,153 @@
       </tr>`;
     }
 
+    function drawChartDia(values, labels, idxHighlight) {
+      const canvas = document.getElementById('chartDia');
+      if (!canvas) return null;
+      const ctx = canvas.getContext('2d');
+      const parent = canvas.parentElement;
+      const cw = canvas.clientWidth || canvas.offsetWidth || (parent ? parent.clientWidth : 800) || 800;
+      const ch = canvas.clientHeight || canvas.offsetHeight || parseInt(getComputedStyle(canvas).height) || 420;
+      const W = ctx.canvas.width = cw;
+      const H = ctx.canvas.height = ch;
+      const m = 40;
+      const hasData = Array.isArray(values) && values.length > 0;
+      const min = hasData ? Math.min(...values) : 0;
+      const max = hasData ? Math.max(...values) : 1;
+      const sx = hasData && values.length > 1 ? (W - 2*m) / (values.length - 1) : 0;
+      const sy = (H - 2*m) / (max - min || 1);
+      ctx.clearRect(0,0,W,H);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      for (let i = 0; i <= 4; i++) {
+        const y = m + i * (H - 2*m) / 4;
+        ctx.beginPath(); ctx.moveTo(m, y); ctx.lineTo(W - m, y); ctx.stroke();
+      }
+      ctx.beginPath(); ctx.moveTo(m, H - m); ctx.lineTo(W - m, H - m); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(m, m); ctx.lineTo(m, H - m); ctx.stroke();
+      if (hasData) {
+        ctx.lineWidth = 2;
+        const grad = ctx.createLinearGradient(m, m, W - m, H - m);
+        grad.addColorStop(0, 'rgba(0,191,255,1)');
+        grad.addColorStop(1, 'rgba(30,144,255,1)');
+        ctx.strokeStyle = grad;
+        ctx.beginPath();
+        values.forEach((v, i) => {
+          const x = m + i * sx;
+          const y = H - m - (v - min) * sy;
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0,191,255,0.15)';
+        ctx.beginPath();
+        values.forEach((v, i) => {
+          const x = m + i * sx;
+          const y = H - m - (v - min) * sy;
+          if (i === 0) ctx.moveTo(x, H - m);
+          ctx.lineTo(x, y);
+        });
+        ctx.lineTo(W - m, H - m);
+        ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.font = '12px Arial, Helvetica, sans-serif';
+      ctx.textAlign = 'center';
+      const stepX = Math.max(1, Math.ceil(values.length / 8));
+      for (let i = 0; i < values.length; i++) {
+        const x = m + i * sx;
+        const y = H - m - (values[i] - min) * sy;
+        if (i % stepX === 0 || i === values.length - 1) {
+          const lbl = labels && labels[i] ? labels[i] : '';
+          ctx.save();
+          ctx.translate(x, H - m + 18);
+          ctx.rotate(-Math.PI / 4);
+          ctx.fillText(lbl, 0, 0);
+          ctx.restore();
+          ctx.fillText(String(values[i]), x, y - 8);
+        }
+      }
+        const ix = Math.max(0, Math.min(values.length - 1, idxHighlight));
+        const xh = m + ix * sx;
+        const yh = H - m - (values[ix] - min) * sy;
+        return { x: xh, y: yh };
+      } else {
+        return { x: m, y: H - m };
+      }
+    }
+
+    function drawCandlesDia(values, labels, idxHighlight) {
+      const canvas = document.getElementById('chartDia');
+      if (!canvas) return null;
+      const ctx = canvas.getContext('2d');
+      const parent = canvas.parentElement;
+      const cw = canvas.clientWidth || canvas.offsetWidth || (parent ? parent.clientWidth : 800) || 800;
+      const ch = canvas.clientHeight || canvas.offsetHeight || parseInt(getComputedStyle(canvas).height) || 420;
+      const W = ctx.canvas.width = cw;
+      const H = ctx.canvas.height = ch;
+      const m = 40;
+      const n = Array.isArray(values) ? values.length : 0;
+      ctx.clearRect(0,0,W,H);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      for (let i = 0; i <= 4; i++) {
+        const y = m + i * (H - 2*m) / 4;
+        ctx.beginPath(); ctx.moveTo(m, y); ctx.lineTo(W - m, y); ctx.stroke();
+      }
+      ctx.beginPath(); ctx.moveTo(m, H - m); ctx.lineTo(W - m, H - m); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(m, m); ctx.lineTo(m, H - m); ctx.stroke();
+      if (n === 0) return { x: m, y: H - m };
+      const opens = values.map((v,i) => i === 0 ? v : values[i-1]);
+      const closes = values.slice();
+      let minVal = Math.min(...opens, ...closes);
+      let maxVal = Math.max(...opens, ...closes);
+      const pad = Math.max(1, Math.round((maxVal - minVal) * 0.05));
+      minVal -= pad; maxVal += pad;
+      const sx = n > 1 ? (W - 2*m) / (n - 1) : 0;
+      const sy = (H - 2*m) / (maxVal - minVal || 1);
+      const bw = Math.max(3, Math.min(18, Math.floor((sx || 10) * 0.6)));
+      const fontSize = n > 60 ? 8 : (n > 30 ? 10 : 12);
+      for (let i = 0; i < n; i++) {
+        const open = opens[i], close = closes[i];
+        const high = Math.max(open, close);
+        const low = Math.min(open, close);
+        const x = m + i * sx;
+        const yOpen = H - m - (open - minVal) * sy;
+        const yClose = H - m - (close - minVal) * sy;
+        const yHigh = H - m - (high - minVal) * sy;
+        const yLow = H - m - (low - minVal) * sy;
+        const up = close >= open;
+        ctx.strokeStyle = up ? 'rgba(0,255,170,0.9)' : 'rgba(255,80,80,0.9)';
+        ctx.fillStyle = up ? 'rgba(0,255,170,0.25)' : 'rgba(255,80,80,0.25)';
+        ctx.beginPath(); ctx.moveTo(x, yHigh); ctx.lineTo(x, yLow); ctx.stroke();
+        const yTop = Math.min(yOpen, yClose);
+        const yBot = Math.max(yOpen, yClose);
+        const h = Math.max(1, yBot - yTop);
+        ctx.fillRect(x - bw/2, yTop, bw, h);
+        ctx.strokeRect(x - bw/2, yTop, bw, h);
+        if (labels) {
+          const lbl = labels[i] || '';
+          ctx.save();
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          ctx.font = fontSize + 'px Arial, Helvetica, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.translate(x, H - m + 18);
+          ctx.rotate(-Math.PI / 3);
+          ctx.fillText(lbl, 0, 0);
+          ctx.restore();
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          ctx.textAlign = 'center';
+          ctx.font = fontSize + 'px Arial, Helvetica, sans-serif';
+          ctx.fillText(String(close), x, yTop - 8);
+        }
+      }
+      if (typeof idxHighlight === 'number' && idxHighlight >= 0 && idxHighlight < n) {
+        const xh = m + idxHighlight * sx;
+        const yh = H - m - (closes[idxHighlight] - minVal) * sy;
+        return { x: xh, y: yh };
+      }
+      return { x: m, y: H - m };
+    }
+
     function mostrarPopup(nome, total) {
       const popup = document.getElementById("popup");
       const img = document.getElementById("popupImg");
@@ -701,6 +879,28 @@
       });
       document.getElementById("rankingTable").innerHTML = linhasRanking.join('');
 
+      try {
+        const resDia = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/DIA");
+        const dadosDia = await resDia.json();
+        const serie = dadosDia.map(r => parseInt(r["matriculas"]) || 0);
+        const hoje = new Date();
+        const hojeStr = hoje.toLocaleDateString('pt-BR');
+        let idxHoje = dadosDia.findIndex(r => (r["data"] || '').trim() === hojeStr);
+        window.__diaSerie = serie;
+        window.__diaIdx = idxHoje;
+        const labelsDia = dadosDia.map(r => (r["data"] || r["dia"] || ''));
+        window.__diaLabels = labelsDia;
+        const dot = document.getElementById('todayDotDia');
+        let pos;
+        if (idxHoje >= 0) {
+          pos = drawCandlesDia(serie, labelsDia, idxHoje);
+          if (dot && pos) { dot.style.left = pos.x + 'px'; dot.style.top = pos.y + 'px'; dot.style.display = 'block'; }
+        } else {
+          pos = drawCandlesDia(serie, labelsDia, -1);
+          if (dot) { dot.style.display = 'none'; }
+        }
+      } catch (e) {}
+
       dados.forEach(d => {
         const nome = d["Consultores"];
         const totalAtual = parseInt(d["TOTAL GERAL"]) || 0;
@@ -729,6 +929,20 @@
       });
       slideAtual = numero;
       atualizarIndicador();
+      if (slides[numero - 1]) {
+        const hasDia = !!slides[numero - 1].querySelector('#chartDia');
+        if (hasDia && window.__diaSerie) {
+          const dot = document.getElementById('todayDotDia');
+          let pos;
+          if (typeof window.__diaIdx === 'number' && window.__diaIdx >= 0) {
+            pos = drawCandlesDia(window.__diaSerie, window.__diaLabels, window.__diaIdx);
+            if (dot && pos) { dot.style.left = pos.x + 'px'; dot.style.top = pos.y + 'px'; dot.style.display = 'block'; }
+          } else {
+            pos = drawCandlesDia(window.__diaSerie, window.__diaLabels, -1);
+            if (dot) { dot.style.display = 'none'; }
+          }
+        }
+      }
     }
 
     function proximoSlide() {
@@ -779,6 +993,20 @@
       if (totalEl) totalEl.textContent = totalSlides;
       alternarSlide();
     }
+
+    window.addEventListener('resize', () => {
+      if (window.__diaSerie) {
+        const dot = document.getElementById('todayDotDia');
+        let pos;
+        if (typeof window.__diaIdx === 'number' && window.__diaIdx >= 0) {
+          pos = drawCandlesDia(window.__diaSerie, window.__diaLabels, window.__diaIdx);
+          if (dot && pos) { dot.style.left = pos.x + 'px'; dot.style.top = pos.y + 'px'; dot.style.display = 'block'; }
+        } else {
+          pos = drawCandlesDia(window.__diaSerie, window.__diaLabels, -1);
+          if (dot) { dot.style.display = 'none'; }
+        }
+      }
+    });
 
     // Controle por teclado
     document.addEventListener('keydown', function(event) {
