@@ -820,6 +820,25 @@
           ctx.fillText(String(close), x, yTop - 8);
         }
       }
+      const maWindow = 7;
+      const ma = Array(n).fill(null);
+      for (let i = 0; i < n; i++) {
+        if (i + 1 >= maWindow) {
+          let sum = 0;
+          for (let j = i - maWindow + 1; j <= i; j++) sum += closes[j];
+          ma[i] = sum / maWindow;
+        }
+      }
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(255,215,0,0.95)';
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        if (ma[i] == null) continue;
+        const x = m + i * sx;
+        const y = H - m - (ma[i] - minVal) * sy;
+        if (i === maWindow - 1) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
       if (typeof idxHighlight === 'number' && idxHighlight >= 0 && idxHighlight < n) {
         const xh = m + idxHighlight * sx;
         const yh = H - m - (closes[idxHighlight] - minVal) * sy;
