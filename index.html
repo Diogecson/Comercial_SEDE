@@ -864,7 +864,7 @@
     }
 
     async function carregarTudo() {
-      const res = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/base");
+      const res = await fetch("https://opensheet.elk.sh/1K8BUyYM6MlvaRpsvJFfij88kKtLIGh64Zy8V2fqhDBI/Geral");
       const dados = await res.json();
 
       const internos = dados.filter(d => d["Tipo"] === "Interno").sort((a,b) => b["TOTAL GERAL"] - a["TOTAL GERAL"]);
@@ -899,7 +899,7 @@
       document.getElementById("rankingTable").innerHTML = linhasRanking.join('');
 
       try {
-        const resDia = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/DIA");
+        const resDia = await fetch("https://opensheet.elk.sh/1K8BUyYM6MlvaRpsvJFfij88kKtLIGh64Zy8V2fqhDBI/DIA");
         const dadosDia = await resDia.json();
         const serie = dadosDia.map(r => parseInt(r["matriculas"]) || 0);
         const hoje = new Date();
