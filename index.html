@@ -234,6 +234,62 @@
     }
 
     /* ============================================================
+       CAPTAÇÃO POR MODALIDADE
+       ============================================================ */
+    .captacao-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .captacao-card {
+      background: linear-gradient(135deg, rgba(0,191,255,0.10), rgba(30,144,255,0.18));
+      border: 1px solid rgba(0,191,255,0.3);
+      border-radius: 16px;
+      padding: 26px 20px;
+      transition: transform 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .captacao-card:nth-child(1) { animation-delay: 0.1s; }
+    .captacao-card:nth-child(2) { animation-delay: 0.2s; }
+    .captacao-card:nth-child(3) { animation-delay: 0.3s; }
+    .captacao-card:nth-child(4) { animation-delay: 0.4s; }
+    .captacao-card:nth-child(5) { animation-delay: 0.5s; }
+    .captacao-card:nth-child(6) { animation-delay: 0.6s; }
+    .captacao-card:hover { transform: translateY(-4px); }
+    .captacao-card .cap-icon { font-size: 42px; margin-bottom: 8px; line-height: 1; }
+    .captacao-card .cap-label {
+      font-size: 14px;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .captacao-card .cap-num {
+      font-size: 52px;
+      font-weight: 800;
+      color: cyan;
+      text-shadow: 0 0 20px rgba(0,255,255,0.5);
+      line-height: 1;
+    }
+    .captacao-card.total {
+      background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.20));
+      border-color: rgba(255,215,0,0.5);
+      box-shadow: 0 0 30px rgba(255,215,0,0.2);
+    }
+    .captacao-card.total .cap-num {
+      color: #ffd700;
+      text-shadow: 0 0 20px rgba(255,215,0,0.7);
+    }
+    @media (max-width: 900px) { .captacao-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .captacao-grid { grid-template-columns: 1fr; } }
+
+    /* ============================================================
        Slider "Todos os Consultores"
        ============================================================ */
     .slider-container {
@@ -412,6 +468,43 @@
       </tr></thead>
       <tbody id="tabelaTop3EadBrasil"></tbody>
     </table>
+  </div>
+
+  <!-- Slide Captação por Modalidade -->
+  <div class="slide" id="slideCaptacao">
+    <h1>Captação <span id="mesAtualCaptacao">—</span></h1>
+    <div class="captacao-grid">
+      <div class="captacao-card">
+        <div class="cap-icon">🏫</div>
+        <div class="cap-label">Presencial</div>
+        <div class="cap-num" id="capPresencial">0</div>
+      </div>
+      <div class="captacao-card">
+        <div class="cap-icon">💻</div>
+        <div class="cap-label">EAD</div>
+        <div class="cap-num" id="capEad">0</div>
+      </div>
+      <div class="captacao-card">
+        <div class="cap-icon">🔀</div>
+        <div class="cap-label">Semi-Presencial</div>
+        <div class="cap-num" id="capSemi">0</div>
+      </div>
+      <div class="captacao-card">
+        <div class="cap-icon">🤖</div>
+        <div class="cap-label">Inteligência Artificial</div>
+        <div class="cap-num" id="capIa">0</div>
+      </div>
+      <div class="captacao-card">
+        <div class="cap-icon">🎓</div>
+        <div class="cap-label">Pós-Graduação</div>
+        <div class="cap-num" id="capPos">0</div>
+      </div>
+      <div class="captacao-card total">
+        <div class="cap-icon">🏆</div>
+        <div class="cap-label">Total</div>
+        <div class="cap-num" id="capTotal">0</div>
+      </div>
+    </div>
   </div>
 
   <!-- Slide 4: Todos os Consultores -->
@@ -686,6 +779,24 @@
       const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
       document.getElementById("linha1").innerHTML = linha1 + linha1;
       document.getElementById("linha2").innerHTML = linha2 + linha2;
+
+      // ==== Captação por modalidade (soma todas as colunas) ====
+      const soma = (col) => dados.reduce((acc, d) => acc + (parseInt(d[col]) || 0), 0);
+      const cPresencial = soma("Matriculas Presencial");
+      const cEad        = soma("Matriculas Ead");
+      const cSemi       = soma("Matriculas Semi-Presencial");
+      const cIa         = soma("Inteligencia Artificial");
+      const cPos        = soma("Pós-Graduação");
+      const cTotal      = cPresencial + cEad + cSemi + cIa + cPos;
+      document.getElementById("capPresencial").textContent = cPresencial.toLocaleString("pt-BR");
+      document.getElementById("capEad").textContent        = cEad.toLocaleString("pt-BR");
+      document.getElementById("capSemi").textContent       = cSemi.toLocaleString("pt-BR");
+      document.getElementById("capIa").textContent         = cIa.toLocaleString("pt-BR");
+      document.getElementById("capPos").textContent        = cPos.toLocaleString("pt-BR");
+      document.getElementById("capTotal").textContent      = cTotal.toLocaleString("pt-BR");
+      // Mês atual dinâmico (Janeiro, Fevereiro, …)
+      const mes = new Date().toLocaleDateString('pt-BR', { month: 'long' });
+      document.getElementById("mesAtualCaptacao").textContent = mes.charAt(0).toUpperCase() + mes.slice(1);
 
       // ==== Ranking Geral ====
       const ranking = [...dados]
