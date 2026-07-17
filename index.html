@@ -195,6 +195,40 @@
     }
 
     /* ============================================================
+       LAYOUT FUNIL — 1 card em cima, 2 embaixo (Y invertido)
+       ============================================================ */
+    .funnel-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 210px));
+      column-gap: 60px;
+      row-gap: 30px;
+      justify-content: center;
+      padding: 30px 20px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .funnel-layout .top-card {
+      grid-column: 1 / -1;
+      justify-self: center;
+      border: 2px solid #00bfff;
+      box-shadow: 0 0 20px rgba(0,191,255,0.4);
+    }
+    .funnel-layout .top-card::before {
+      content: "⭐";
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+    }
+    @media (max-width: 600px) {
+      .funnel-layout {
+        grid-template-columns: 1fr;
+        column-gap: 20px;
+      }
+    }
+
+    /* ============================================================
        Slider "Todos os Consultores"
        ============================================================ */
     .slider-container {
@@ -394,10 +428,15 @@
     </div>
   </div>
 
-  <!-- Slide 6: Supervisores -->
+  <!-- Slide 6: Estrutura Comercial -->
   <div class="slide" id="slide6">
-    <h1>Supervisores</h1>
-    <div class="container" style="flex-wrap: nowrap; justify-content: center; gap: 20px;">
+    <h1>Estrutura Comercial</h1>
+    <div class="funnel-layout">
+      <div class="card top-card" style="width: 200px; padding: 15px;">
+        <img src="imagens/vanessa.png">
+        <div class="nome">Vanessa</div>
+        <div class="cargo">Especialista de Performance</div>
+      </div>
       <div class="card" style="width: 200px; padding: 15px;">
         <img src="imagens/vanessafaria.png">
         <div class="nome">Vanessa Faria</div>
@@ -406,7 +445,7 @@
       <div class="card" style="width: 200px; padding: 15px;">
         <img src="imagens/dg.png">
         <div class="nome">DG</div>
-        <div class="cargo">Supervisor Comercial Hunters</div>
+        <div class="cargo">Supervisor Comercial Vendas Polos</div>
       </div>
     </div>
   </div>
@@ -604,8 +643,10 @@
     }
 
     async function carregarTudo() {
-      const res = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/base");
-      const dados = await res.json();
+      const res = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/base?t=" + Date.now(), { cache: 'no-store' });
+      const dadosBrutos = await res.json();
+      // Ignora linhas sem nome de consultor (ex.: linha em branco ou zumbi)
+      const dados = dadosBrutos.filter(d => (d["Consultores"] || "").trim() !== "");
 
       // ==== INTERNOS ====
       const internos = dados
@@ -706,6 +747,8 @@
           }
         }
       }
+      // Reagenda o timer com a duração do novo slide (20s no slide 4, 10s nos demais)
+      if (autoPlay) iniciarAutoPlay();
     }
 
     function proximoSlide()  { mostrarSlide((slideAtual % totalSlides) + 1); }
@@ -715,7 +758,7 @@
       const btn = document.getElementById("pauseBtn");
       if (autoPlay) {
         autoPlay = false;
-        clearInterval(intervalId);
+        clearTimeout(intervalId);
         btn.innerHTML = "▶ Continuar";
         btn.style.background = "linear-gradient(135deg, #28a745, #20c997)";
       } else {
@@ -727,8 +770,10 @@
     }
 
     function iniciarAutoPlay() {
-      if (intervalId) clearInterval(intervalId);
-      intervalId = setInterval(() => { if (autoPlay) proximoSlide(); }, 10000);
+      if (intervalId) clearTimeout(intervalId);
+      // Slide 4 (Todos os Consultores) fica 20s; demais 10s
+      const delay = slideAtual === 4 ? 20000 : 10000;
+      intervalId = setTimeout(() => { if (autoPlay) proximoSlide(); }, delay);
     }
 
     function alternarSlide() {
