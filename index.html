@@ -195,7 +195,7 @@
     }
 
     /* ============================================================
-       LAYOUT FUNIL — 1 card em cima, 2 embaixo (Y invertido)
+       LAYOUT FUNIL — 2 cards em cima, 1 embaixo (V invertido)
        ============================================================ */
     .funnel-layout {
       display: grid;
@@ -207,19 +207,24 @@
       max-width: 720px;
       margin: 0 auto;
     }
-    .funnel-layout .top-card {
+    .funnel-layout .bottom-card {
       grid-column: 1 / -1;
       justify-self: center;
+      width: 170px !important;
+      padding: 12px !important;
       border: 2px solid #00bfff;
       box-shadow: 0 0 20px rgba(0,191,255,0.4);
     }
-    .funnel-layout .top-card::before {
+    .funnel-layout .bottom-card img {
+      height: 150px !important;
+    }
+    .funnel-layout .bottom-card::before {
       content: "⭐";
       position: absolute;
       top: -14px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 24px;
+      font-size: 22px;
     }
     @media (max-width: 600px) {
       .funnel-layout {
@@ -432,11 +437,6 @@
   <div class="slide" id="slide6">
     <h1>Estrutura Comercial</h1>
     <div class="funnel-layout">
-      <div class="card top-card" style="width: 200px; padding: 15px;">
-        <img src="imagens/vanessa.png">
-        <div class="nome">Vanessa</div>
-        <div class="cargo">Especialista de Performance</div>
-      </div>
       <div class="card" style="width: 200px; padding: 15px;">
         <img src="imagens/vanessafaria.png">
         <div class="nome">Vanessa Faria</div>
@@ -446,6 +446,11 @@
         <img src="imagens/dg.png">
         <div class="nome">DG</div>
         <div class="cargo">Supervisor Comercial Vendas Polos</div>
+      </div>
+      <div class="card bottom-card">
+        <img src="imagens/vanessa.png">
+        <div class="nome">Vanessa</div>
+        <div class="cargo">Especialista de Performance</div>
       </div>
     </div>
   </div>
@@ -643,7 +648,7 @@
     }
 
     async function carregarTudo() {
-      const res = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/base?t=" + Date.now(), { cache: 'no-store' });
+      const res = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/base");
       const dadosBrutos = await res.json();
       // Ignora linhas sem nome de consultor (ex.: linha em branco ou zumbi)
       const dados = dadosBrutos.filter(d => (d["Consultores"] || "").trim() !== "");
