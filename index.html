@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ranking Corrigido</title>
@@ -28,7 +26,7 @@
       gap: 20px;
       padding: 20px;
     }
-    
+
     /* Layout especial para Top 3 */
     .top3-container {
       display: grid;
@@ -40,27 +38,26 @@
       margin: 0 auto;
       align-items: flex-end;
     }
-    
-    /* Responsividade para telas menores */
+
     @media (max-width: 768px) {
       .top3-container {
         grid-template-columns: 1fr;
-        grid-template-areas: 
+        grid-template-areas:
           "top1"
-          "top2" 
+          "top2"
           "top3";
         gap: 30px;
         align-items: center;
       }
     }
-    
+
     @media (max-width: 480px) {
       .top3-container {
         padding: 20px 10px;
         gap: 20px;
       }
     }
-    
+
     .card {
       background-color: rgba(255,255,255,0.05);
       border-radius: 10px;
@@ -68,9 +65,9 @@
       width: 180px;
       text-align: center;
       transition: all 0.3s ease;
+      position: relative;
     }
-    
-    /* Posicionamento específico dos tops */
+
     .card.top1 {
       grid-area: top1;
       width: 100%;
@@ -80,10 +77,9 @@
       border: 3px solid #00bfff;
       box-shadow: 0 0 30px rgba(0,191,255,0.8);
       animation: pulseNeon 2s infinite;
-      position: relative;
       margin: 0 auto;
     }
-    
+
     .card.top1::before {
       content: "👑";
       position: absolute;
@@ -93,7 +89,7 @@
       font-size: 30px;
       animation: bounce 1s infinite;
     }
-    
+
     .card.top2 {
       grid-area: top2;
       background: linear-gradient(135deg, rgba(192,192,192,0.2), rgba(169,169,169,0.2));
@@ -104,7 +100,7 @@
       padding: 15px;
       margin: 0 auto;
     }
-    
+
     .card.top3 {
       grid-area: top3;
       background: linear-gradient(135deg, rgba(205,127,50,0.2), rgba(184,115,51,0.2));
@@ -115,208 +111,92 @@
       padding: 15px;
       margin: 0 auto;
     }
-    
+
     .card img {
-       width: 100%;
-       height: 180px;
-       object-fit: cover;
-       border-radius: 8px;
-     }
-     
-     .card.top1 img {
-       height: 200px;
-       border: 3px solid #00bfff;
-       box-shadow: 0 0 15px rgba(0,191,255,0.6);
-     }
-     
-     .card.top2 img {
-       height: 180px;
-       border: 3px solid silver;
-       box-shadow: 0 0 15px rgba(192,192,192,0.4);
-     }
-     
-     .card.top3 img {
-       height: 180px;
-       border: 3px solid #cd7f32;
-       box-shadow: 0 0 15px rgba(205,127,50,0.4);
-     }
-    
-    /* Animações especiais */
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card.top1 img { height: 200px; border: 3px solid #00bfff; box-shadow: 0 0 15px rgba(0,191,255,0.6); }
+    .card.top2 img { height: 180px; border: 3px solid silver; box-shadow: 0 0 15px rgba(192,192,192,0.4); }
+    .card.top3 img { height: 180px; border: 3px solid #cd7f32; box-shadow: 0 0 15px rgba(205,127,50,0.4); }
+
     @keyframes pulseNeon {
       0%, 100% { box-shadow: 0 0 30px rgba(0,191,255,0.8); }
       50% { box-shadow: 0 0 50px rgba(0,191,255,1); }
     }
-    
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
       40% { transform: translateX(-50%) translateY(-10px); }
       60% { transform: translateX(-50%) translateY(-5px); }
     }
-    
-    /* Estilos para posições */
-     .card {
-       position: relative;
-     }
-     
-     .card .position-badge {
-       position: absolute;
-       top: 10px;
-       right: 10px;
-       background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-       color: white;
-       border-radius: 50%;
-       width: 35px;
-       height: 35px;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       font-weight: bold;
-       font-size: 16px;
-       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-       z-index: 10;
-     }
-     
-     .card.top1 .position-badge {
-       background: linear-gradient(45deg, #00bfff, #1e90ff);
-       width: 40px;
-       height: 40px;
-       font-size: 18px;
-       top: 15px;
-       right: 15px;
-     }
-     
-     .card.top2 .position-badge {
-       background: linear-gradient(45deg, #c0c0c0, #a9a9a9);
-       top: 10px;
-       right: 10px;
-     }
-     
-     .card.top3 .position-badge {
-       background: linear-gradient(45deg, #cd7f32, #b8733b);
-       top: 10px;
-       right: 10px;
-     }
-     
-     /* Responsividade para badges */
-     @media (max-width: 480px) {
-       .card .position-badge {
-         width: 30px;
-         height: 30px;
-         font-size: 14px;
-         top: 8px;
-         right: 8px;
-       }
-       
-       .card.top1 .position-badge {
-         width: 35px;
-         height: 35px;
-         font-size: 16px;
-         top: 12px;
-         right: 12px;
-       }
-     }
-    .team-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 15px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 15px;
-      }
-     .team-section {
-       background: rgba(255,255,255,0.03);
-       border-radius: 12px;
-       padding: 15px;
-       opacity: 0;
-       transform: translateY(30px);
-       animation: fadeInUp 0.8s ease forwards;
-     }
-     .team-section:nth-child(1) { animation-delay: 0.2s; }
-      .team-section:nth-child(2) { animation-delay: 0.4s; }
-      .team-section:nth-child(3) { animation-delay: 0.6s; }
-      .team-section:nth-child(4) { animation-delay: 0.8s; }
-      .team-section:nth-child(5) { animation-delay: 1.0s; }
-     .team-title {
-       font-size: 20px;
-       color: cyan;
-       margin-bottom: 15px;
-       font-weight: bold;
-       text-align: center;
-       text-shadow: 0 0 10px rgba(0,255,255,0.5);
-     }
-     .team-grid {
-       display: flex;
-       justify-content: center;
-       flex-wrap: wrap;
-       gap: 12px;
-       align-items: flex-end;
-     }
-     .team-member {
-       background-color: rgba(255,255,255,0.08);
-       border-radius: 10px;
-       padding: 8px;
-       text-align: center;
-       transition: all 0.3s ease;
-       opacity: 0;
-       transform: scale(0.8);
-       animation: popIn 0.6s ease forwards;
-     }
-     .team-member:hover {
-       transform: translateY(-5px) scale(1.05);
-       box-shadow: 0 10px 20px rgba(0,255,255,0.2);
-     }
-     .team-member img {
-       width: 60px;
-       height: 60px;
-       object-fit: cover;
-       border-radius: 50%;
-       border: 2px solid cyan;
-       margin-bottom: 6px;
-       transition: all 0.3s ease;
-     }
-     .team-member:hover img {
-       border-color: #00ffff;
-       box-shadow: 0 0 15px rgba(0,255,255,0.6);
-     }
-     .team-member .nome {
-       font-size: 14px;
-       font-weight: bold;
-       margin-bottom: 3px;
-     }
-     .team-member .cargo {
-       font-size: 11px;
-       color: #aaa;
-     }
-     /* Animações */
-     @keyframes fadeInUp {
-       to {
-         opacity: 1;
-         transform: translateY(0);
-       }
-     }
-     @keyframes popIn {
-       to {
-         opacity: 1;
-         transform: scale(1);
-       }
-     }
-     /* Efeito escadinha com animação */
-     .team-member:nth-child(1) { animation-delay: 0.1s; transform: translateY(0px) scale(0.8); }
-     .team-member:nth-child(2) { animation-delay: 0.2s; transform: translateY(5px) scale(0.8); }
-     .team-member:nth-child(3) { animation-delay: 0.3s; transform: translateY(10px) scale(0.8); }
-     .team-member:nth-child(4) { animation-delay: 0.4s; transform: translateY(15px) scale(0.8); }
-     .team-member:nth-child(5) { animation-delay: 0.5s; transform: translateY(5px) scale(0.8); }
-     .team-member:nth-child(6) { animation-delay: 0.6s; transform: translateY(10px) scale(0.8); }
-     .team-member:nth-child(7) { animation-delay: 0.7s; transform: translateY(15px) scale(0.8); }
-     .team-member:nth-child(8) { animation-delay: 0.8s; transform: translateY(20px) scale(0.8); }
-     .team-member:nth-child(9) { animation-delay: 0.9s; transform: translateY(8px) scale(0.8); }
-     .team-member:nth-child(10) { animation-delay: 1s; transform: translateY(12px) scale(0.8); }
-    .total {
-      font-size: 20px;
-      margin-top: 10px;
-      color: cyan;
+
+    .card .position-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 10;
     }
+    .card.top1 .position-badge { background: linear-gradient(45deg, #00bfff, #1e90ff); width: 40px; height: 40px; font-size: 18px; top: 15px; right: 15px; }
+    .card.top2 .position-badge { background: linear-gradient(45deg, #c0c0c0, #a9a9a9); }
+    .card.top3 .position-badge { background: linear-gradient(45deg, #cd7f32, #b8733b); }
+
+    @media (max-width: 480px) {
+      .card .position-badge { width: 30px; height: 30px; font-size: 14px; top: 8px; right: 8px; }
+      .card.top1 .position-badge { width: 35px; height: 35px; font-size: 16px; top: 12px; right: 12px; }
+    }
+
+    /* ============================================================
+       LAYOUT B2B — SEDE / POLO lado a lado
+       ============================================================ */
+    .b2b-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .b2b-block {
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      padding: 20px 10px;
+      border: 1px solid rgba(0,191,255,0.25);
+    }
+    .b2b-block h2 {
+      color: cyan;
+      text-shadow: 0 0 10px rgba(0,255,255,0.5);
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+    .b2b-split .top3-container { padding: 30px 10px; gap: 12px; max-width: 100%; }
+    .b2b-split .card { width: auto; padding: 10px; }
+    .b2b-split .card.top1 { padding: 14px; max-width: 160px; }
+    .b2b-split .card.top2,
+    .b2b-split .card.top3 { max-width: 140px; padding: 10px; }
+    .b2b-split .card img { height: 130px; }
+    .b2b-split .card.top1 img { height: 150px; }
+    .b2b-split table { width: 98%; font-size: 12px; }
+    .b2b-split th, .b2b-split td { padding: 6px; }
+    @media (max-width: 900px) {
+      .b2b-split { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    /* ============================================================
+       Slider "Todos os Consultores"
+       ============================================================ */
     .slider-container {
       overflow: hidden;
       position: relative;
@@ -332,50 +212,33 @@
       object-fit: cover;
       border-radius: 10px;
     }
-    .slider-track.reverse {
-      animation-direction: reverse;
-    }
-    .consultor-card {
-      flex: 0 0 auto;
-      width: 220px;
-      margin: 0 15px;
-    }
+    .slider-track.reverse { animation-direction: reverse; }
+    .consultor-card { flex: 0 0 auto; width: 220px; margin: 0 15px; }
     @keyframes scrollSlider {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+
+    .total { font-size: 20px; margin-top: 10px; color: cyan; }
+
+    /* Tabelas */
     table {
       width: 85%;
       margin: 20px auto;
       border-collapse: collapse;
       font-size: 15px;
     }
-    th, td {
-      padding: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    thead {
-      background-color: rgba(0, 73, 142, 0.85);
-    }
+    th, td { padding: 10px; border: 1px solid rgba(255, 255, 255, 0.2); }
+    thead { background-color: rgba(0, 73, 142, 0.85); }
+    .rank-top    { background-color: rgba(0, 255, 255, 0.12); }
+    .rank-mid    { background-color: rgba(30, 144, 255, 0.10); }
+    .rank-bottom { background-color: rgba(0, 73, 142, 0.08); }
 
-    .rank-top {
-      background-color: rgba(0, 255, 255, 0.12);
-    }
-    .rank-mid {
-      background-color: rgba(30, 144, 255, 0.10);
-    }
-    .rank-bottom {
-      background-color: rgba(0, 73, 142, 0.08);
-    }
-
+    /* Gráfico dia */
     .chart-area { position: relative; width: 100%; max-width: 1100px; margin: 0 auto; }
     .chart-area canvas { width: 100%; height: clamp(320px, 58vh, 560px); border-radius: 12px; display: block; margin: 0 auto; }
-    @media (max-width: 768px) {
-      .chart-area canvas { height: clamp(280px, 52vh, 520px); }
-    }
-    @media (max-width: 480px) {
-      .chart-area canvas { height: clamp(240px, 48vh, 480px); }
-    }
+    @media (max-width: 768px) { .chart-area canvas { height: clamp(280px, 52vh, 520px); } }
+    @media (max-width: 480px) { .chart-area canvas { height: clamp(240px, 48vh, 480px); } }
     .dot {
       position: absolute;
       width: 14px; height: 14px; border-radius: 50%;
@@ -389,6 +252,7 @@
       to   { opacity: 1;   box-shadow: 0 0 18px rgba(0,255,255,1); }
     }
 
+    /* Popup nova matrícula */
     .popup {
       display: none;
       position: fixed;
@@ -399,24 +263,11 @@
       z-index: 9999;
       flex-direction: column;
     }
-    .popup img {
-      width: 200px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      object-fit: cover;
-      border: 4px solid cyan;
-    }
-    .popup .msg {
-      font-size: 24px;
-      color: cyan;
-      margin-bottom: 10px;
-    }
-    .popup .nome {
-      font-size: 32px;
-      font-weight: bold;
-    }
-    
-    /* Botões de navegação */
+    .popup img { width: 200px; border-radius: 16px; margin-bottom: 20px; object-fit: cover; border: 4px solid cyan; }
+    .popup .msg { font-size: 24px; color: cyan; margin-bottom: 10px; }
+    .popup .nome { font-size: 32px; font-weight: bold; }
+
+    /* Controles */
     .nav-controls {
       position: fixed;
       bottom: 20px;
@@ -430,7 +281,6 @@
       border-radius: 25px;
       backdrop-filter: blur(10px);
     }
-    
     .nav-btn {
       background: linear-gradient(135deg, #00bfff, #1e90ff);
       border: none;
@@ -443,25 +293,10 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
     }
-    
-    .nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
-    }
-    
-    .nav-btn:active {
-      transform: translateY(0);
-    }
-    
-    .nav-btn.pause {
-      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-    }
-    
-    .nav-btn.pause:hover {
-      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
-    }
-    
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5); }
+    .nav-btn:active { transform: translateY(0); }
+    .nav-btn.pause { background: linear-gradient(135deg, #ff6b6b, #ee5a24); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); }
+    .nav-btn.pause:hover { box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5); }
     .slide-indicator {
       background: rgba(255, 255, 255, 0.2);
       color: white;
@@ -473,30 +308,15 @@
       align-items: center;
       gap: 5px;
     }
-    
-    /* Ocultar controles em tela cheia */
-    :fullscreen .nav-controls {
-      display: none;
-    }
-    
-    :-webkit-full-screen .nav-controls {
-      display: none;
-    }
-    
-    :-moz-full-screen .nav-controls {
-      display: none;
-    }
-    
-    :-ms-fullscreen .nav-controls {
-      display: none;
-    }
+    :fullscreen .nav-controls,
+    :-webkit-full-screen .nav-controls,
+    :-moz-full-screen .nav-controls,
+    :-ms-fullscreen .nav-controls { display: none; }
   </style>
 
   <button onclick="habilitarAudio()" style="position: fixed; top: 10px; left: 30%; transform: translateX(-50%); z-index: 10000; background-color: cyan; color: black; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
     🔊 Ativar Som
   </button>
-  
-  
 </head>
 <body>
   <header>
@@ -512,27 +332,69 @@
 
   <audio id="aplausos" src="https://www.soundjay.com/human/sounds/applause-8.mp3" preload="auto"></audio>
 
-  <div class="slide" id="slide1"><h1>Top 3 Internos</h1><div class="container" id="top3Interno"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="tabelaTop3Interno"></tbody></table></div>
-  <div class="slide" id="slide2"><h1>Top 3 Externos</h1><div class="container" id="top3Externo"></div><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="tabelaTop3Externo"></tbody></table></div>
+  <!-- Slide 1: Top 3 Internos -->
+  <div class="slide" id="slide1">
+    <h1>Top 3 Internos</h1>
+    <div class="container" id="top3Interno"></div>
+    <table>
+      <thead><tr>
+        <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
+        <th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th>
+      </tr></thead>
+      <tbody id="tabelaTop3Interno"></tbody>
+    </table>
+  </div>
+
+  <!-- Slide 2: Top 3 B2B (SEDE + POLO na mesma tela) -->
+  <div class="slide" id="slide2">
+    <h1>Top 3 B2B</h1>
+    <div class="b2b-split">
+      <div class="b2b-block">
+        <h2>🏢 SEDE</h2>
+        <div class="container" id="top3B2bSede"></div>
+        <table>
+          <thead><tr>
+            <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
+            <th>IA</th><th>Pós</th><th>Total</th>
+          </tr></thead>
+          <tbody id="tabelaB2bSede"></tbody>
+        </table>
+      </div>
+      <div class="b2b-block">
+        <h2>📍 POLO</h2>
+        <div class="container" id="top3B2bPolo"></div>
+        <table>
+          <thead><tr>
+            <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
+            <th>IA</th><th>Pós</th><th>Total</th>
+          </tr></thead>
+          <tbody id="tabelaB2bPolo"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Top 3 EAD Brasil -->
   <div class="slide" id="slide3">
     <h1>Top 3 EAD Brasil</h1>
     <div class="container" id="top3EadBrasil"></div>
     <table>
-      <thead>
-        <tr>
-          <th>Consultor</th>
-          <th>Presencial</th>
-          <th>EAD</th>
-          <th>Semi</th>
-          <th>Inteligencia Artificial</th>
-          <th>Pós-Graduação</th>
-          <th>Total</th>
-        </tr>
-      </thead>
+      <thead><tr>
+        <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
+        <th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th>
+      </tr></thead>
       <tbody id="tabelaTop3EadBrasil"></tbody>
     </table>
   </div>
-  <div class="slide" id="slide4"><h1>Todos os Consultores</h1><div class="slider-container"><div class="slider-track" id="linha1"></div></div><div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div></div>
+
+  <!-- Slide 4: Todos os Consultores -->
+  <div class="slide" id="slide4">
+    <h1>Todos os Consultores</h1>
+    <div class="slider-container"><div class="slider-track" id="linha1"></div></div>
+    <div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div>
+  </div>
+
+  <!-- Slide 5: Coordenadores -->
   <div class="slide" id="slide5">
     <h1>Coordenadores</h1>
     <div class="container">
@@ -548,6 +410,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Slide 6: Supervisores -->
   <div class="slide" id="slide6">
     <h1>Supervisores</h1>
     <div class="container" style="flex-wrap: nowrap; justify-content: center; gap: 10px;">
@@ -575,7 +439,7 @@
         <img src="imagens/vanessafaria.png">
         <div class="nome">Vanessa Faria</div>
         <div class="cargo">Supervisora - Externo</div>
-      </div>      
+      </div>
       <div class="card" style="width: 180px; padding: 15px;">
         <img src="imagens/dg.png">
         <div class="nome">DG</div>
@@ -583,6 +447,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Slide 7: Líderes -->
   <div class="slide" id="slide8">
     <h1>Líderes</h1>
     <div class="container">
@@ -603,8 +469,20 @@
       </div>
     </div>
   </div>
-  <div class="slide" id="slide9"><h1>Ranking Geral Quinzena</h1><table><thead><tr><th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th><th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th></tr></thead><tbody id="rankingTable"></tbody></table></div>
 
+  <!-- Slide 8: Ranking Geral -->
+  <div class="slide" id="slide9">
+    <h1>Ranking Geral Quinzena</h1>
+    <table>
+      <thead><tr>
+        <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
+        <th>Inteligencia Artificial</th><th>Pós-Graduação</th><th>Total</th>
+      </tr></thead>
+      <tbody id="rankingTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Slide 9: Matrículas do Mês -->
   <div class="slide" id="slide10">
     <h1>MATRICULAS MÊS</h1>
     <div class="container">
@@ -615,7 +493,7 @@
     </div>
   </div>
 
-  <!-- Controles de navegação -->
+  <!-- Controles -->
   <div class="nav-controls">
     <button class="nav-btn" onclick="anteriorSlide()">◀ Anterior</button>
     <div class="slide-indicator">
@@ -629,19 +507,14 @@
     const vendasAnteriores = {};
 
     function normalizarNome(nome) {
-      return nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '').replace(/[^a-z]/g, '');
+      return (nome || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, '').replace(/[^a-z]/g, '');
+    }
+
+    function tipoNormalizado(d) {
+      return (d["Tipo"] || "").trim().toUpperCase();
     }
 
     function criarCard(d, pos) {
-      const nome = d["Consultores"];
-      const total = d["TOTAL GERAL"];
-      const nomeImg = normalizarNome(nome);
-      const posTag = `<div class="position-badge">${pos}</div>`;
-      const className = pos === 1 ? 'top1' : pos === 2 ? 'top2' : 'top3';
-      return `<div class="card ${className}">${posTag}<img src="imagens/${nomeImg}.png"><div class="nome">${nome}</div><div class="total">Total: ${total}</div></div>`;
-    }
-
-    function criarCardEad(d, pos) {
       const nome = d["Consultores"];
       const total = d["TOTAL GERAL"];
       const nomeImg = normalizarNome(nome);
@@ -679,80 +552,6 @@
         <td>${d["Pós-Graduação"] || 0}</td>
         <td>${d["TOTAL GERAL"]}</td>
       </tr>`;
-    }
-
-    function drawChartDia(values, labels, idxHighlight) {
-      const canvas = document.getElementById('chartDia');
-      if (!canvas) return null;
-      const ctx = canvas.getContext('2d');
-      const parent = canvas.parentElement;
-      const cw = canvas.clientWidth || canvas.offsetWidth || (parent ? parent.clientWidth : 800) || 800;
-      const ch = canvas.clientHeight || canvas.offsetHeight || parseInt(getComputedStyle(canvas).height) || 420;
-      const W = ctx.canvas.width = cw;
-      const H = ctx.canvas.height = ch;
-      const m = 40;
-      const hasData = Array.isArray(values) && values.length > 0;
-      const min = hasData ? Math.min(...values) : 0;
-      const max = hasData ? Math.max(...values) : 1;
-      const sx = hasData && values.length > 1 ? (W - 2*m) / (values.length - 1) : 0;
-      const sy = (H - 2*m) / (max - min || 1);
-      ctx.clearRect(0,0,W,H);
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-      for (let i = 0; i <= 4; i++) {
-        const y = m + i * (H - 2*m) / 4;
-        ctx.beginPath(); ctx.moveTo(m, y); ctx.lineTo(W - m, y); ctx.stroke();
-      }
-      ctx.beginPath(); ctx.moveTo(m, H - m); ctx.lineTo(W - m, H - m); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(m, m); ctx.lineTo(m, H - m); ctx.stroke();
-      if (hasData) {
-        ctx.lineWidth = 2;
-        const grad = ctx.createLinearGradient(m, m, W - m, H - m);
-        grad.addColorStop(0, 'rgba(0,191,255,1)');
-        grad.addColorStop(1, 'rgba(30,144,255,1)');
-        ctx.strokeStyle = grad;
-        ctx.beginPath();
-        values.forEach((v, i) => {
-          const x = m + i * sx;
-          const y = H - m - (v - min) * sy;
-          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        });
-        ctx.stroke();
-        ctx.fillStyle = 'rgba(0,191,255,0.15)';
-        ctx.beginPath();
-        values.forEach((v, i) => {
-          const x = m + i * sx;
-          const y = H - m - (v - min) * sy;
-          if (i === 0) ctx.moveTo(x, H - m);
-          ctx.lineTo(x, y);
-        });
-        ctx.lineTo(W - m, H - m);
-        ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,0.85)';
-      ctx.font = '12px Arial, Helvetica, sans-serif';
-      ctx.textAlign = 'center';
-      const stepX = Math.max(1, Math.ceil(values.length / 8));
-      for (let i = 0; i < values.length; i++) {
-        const x = m + i * sx;
-        const y = H - m - (values[i] - min) * sy;
-        if (i % stepX === 0 || i === values.length - 1) {
-          const lbl = labels && labels[i] ? labels[i] : '';
-          ctx.save();
-          ctx.translate(x, H - m + 18);
-          ctx.rotate(-Math.PI / 4);
-          ctx.fillText(lbl, 0, 0);
-          ctx.restore();
-          ctx.fillText(String(values[i]), x, y - 8);
-        }
-      }
-        const ix = Math.max(0, Math.min(values.length - 1, idxHighlight));
-        const xh = m + ix * sx;
-        const yh = H - m - (values[ix] - min) * sy;
-        return { x: xh, y: yh };
-      } else {
-        return { x: m, y: H - m };
-      }
     }
 
     function drawCandlesDia(values, labels, idxHighlight) {
@@ -867,29 +666,45 @@
       const res = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/base");
       const dados = await res.json();
 
-      const internos = dados.filter(d => d["Tipo"] === "Interno").sort((a,b) => b["TOTAL GERAL"] - a["TOTAL GERAL"]);
-      const externos = dados.filter(d => d["Tipo"] === "Externo").sort((a,b) => b["TOTAL GERAL"] - a["TOTAL GERAL"]);
-
+      // ==== INTERNOS ====
+      const internos = dados
+        .filter(d => tipoNormalizado(d) === "INTERNO")
+        .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
       document.getElementById("top3Interno").innerHTML = internos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
       document.getElementById("top3Interno").className = "top3-container";
       document.getElementById("tabelaTop3Interno").innerHTML = internos.slice(0, 3).map(criarLinha).join('');
-      document.getElementById("top3Externo").innerHTML = externos.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
-      document.getElementById("top3Externo").className = "top3-container";
-      document.getElementById("tabelaTop3Externo").innerHTML = externos.slice(0, 3).map(criarLinha).join('');
 
-      const eadBrasilNomes = ["Mauricio", "Milza", "Liliane"];
+      // ==== EAD BRASIL (dinâmico por Tipo) ====
       const eadBrasil = dados
-        .filter(d => eadBrasilNomes.includes(d["Consultores"]))
+        .filter(d => tipoNormalizado(d) === "EAD BRASIL")
         .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
-      document.getElementById("top3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map((d,i) => criarCardEad(d, i+1)).join('');
+      document.getElementById("top3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
       document.getElementById("top3EadBrasil").className = "top3-container";
       document.getElementById("tabelaTop3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map(criarLinha).join('');
 
+      // ==== B2B — SEDE e POLO lado a lado ====
+      const b2bSede = dados
+        .filter(d => tipoNormalizado(d) === "SEDE B2B")
+        .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
+      const b2bPolo = dados
+        .filter(d => tipoNormalizado(d) === "POLO B2B")
+        .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
+
+      document.getElementById("top3B2bSede").innerHTML = b2bSede.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
+      document.getElementById("top3B2bSede").className = "top3-container";
+      document.getElementById("tabelaB2bSede").innerHTML = b2bSede.slice(0, 3).map(criarLinha).join('');
+
+      document.getElementById("top3B2bPolo").innerHTML = b2bPolo.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
+      document.getElementById("top3B2bPolo").className = "top3-container";
+      document.getElementById("tabelaB2bPolo").innerHTML = b2bPolo.slice(0, 3).map(criarLinha).join('');
+
+      // ==== Slider TODOS os consultores ====
       const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
       const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
       document.getElementById("linha1").innerHTML = linha1 + linha1;
       document.getElementById("linha2").innerHTML = linha2 + linha2;
 
+      // ==== Ranking Geral ====
       const ranking = [...dados]
         .sort((a, b) => parseInt(b["TOTAL GERAL"] || 0) - parseInt(a["TOTAL GERAL"] || 0));
       const linhasRanking = ranking.map((d, i) => {
@@ -898,6 +713,7 @@
       });
       document.getElementById("rankingTable").innerHTML = linhasRanking.join('');
 
+      // ==== Gráfico DIA ====
       try {
         const resDia = await fetch("https://opensheet.elk.sh/12fP3mNTB1WwRE4Y41Xjpx9TzdfhXaVrZ5B-XsO9jgEc/DIA");
         const dadosDia = await resDia.json();
@@ -920,6 +736,7 @@
         }
       } catch (e) {}
 
+      // ==== Popup nova matrícula ====
       dados.forEach(d => {
         const nome = d["Consultores"];
         const totalAtual = parseInt(d["TOTAL GERAL"]) || 0;
@@ -931,16 +748,18 @@
       });
     }
 
+    // ============================================================
+    // CONTROLE DE SLIDES
+    // ============================================================
     let slideAtual = 1;
     let autoPlay = true;
     let intervalId;
+    let totalSlides = 9;
+    let slides = [];
 
     function atualizarIndicador() {
       document.getElementById("slideAtualIndicador").textContent = slideAtual;
     }
-
-    let totalSlides = 9;
-    let slides = [];
 
     function mostrarSlide(numero) {
       slides.forEach((el, idx) => {
@@ -964,15 +783,8 @@
       }
     }
 
-    function proximoSlide() {
-      const proximo = (slideAtual % totalSlides) + 1;
-      mostrarSlide(proximo);
-    }
-
-    function anteriorSlide() {
-      const anterior = slideAtual === 1 ? totalSlides : slideAtual - 1;
-      mostrarSlide(anterior);
-    }
+    function proximoSlide()  { mostrarSlide((slideAtual % totalSlides) + 1); }
+    function anteriorSlide() { mostrarSlide(slideAtual === 1 ? totalSlides : slideAtual - 1); }
 
     function togglePause() {
       const btn = document.getElementById("pauseBtn");
@@ -991,11 +803,7 @@
 
     function iniciarAutoPlay() {
       if (intervalId) clearInterval(intervalId);
-      intervalId = setInterval(() => {
-        if (autoPlay) {
-          proximoSlide();
-        }
-      }, 10000);
+      intervalId = setInterval(() => { if (autoPlay) proximoSlide(); }, 10000);
     }
 
     function alternarSlide() {
@@ -1027,27 +835,15 @@
       }
     });
 
-    // Controle por teclado
     document.addEventListener('keydown', function(event) {
       switch(event.key) {
-        case 'ArrowLeft':
-          event.preventDefault();
-          anteriorSlide();
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          proximoSlide();
-          break;
+        case 'ArrowLeft':  event.preventDefault(); anteriorSlide(); break;
+        case 'ArrowRight': event.preventDefault(); proximoSlide();  break;
         case ' ':
-        case 'Spacebar':
-          event.preventDefault();
-          togglePause();
-          break;
+        case 'Spacebar':   event.preventDefault(); togglePause();   break;
         case 'Escape':
           event.preventDefault();
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          }
+          if (document.fullscreenElement) document.exitFullscreen();
           break;
       }
     });
@@ -1061,7 +857,6 @@
         alert("O som não pôde ser ativado. Tente clicar novamente.");
       });
     }
-
   </script>
 </body>
 </html>
