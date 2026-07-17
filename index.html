@@ -345,31 +345,19 @@
     </table>
   </div>
 
-  <!-- Slide 2: Top 3 B2B (SEDE + POLO na mesma tela) -->
+  <!-- Slide 2: TIME B2B (estático - Inara POLOS + Fabricio SEDE) -->
   <div class="slide" id="slide2">
-    <h1>Top 3 B2B</h1>
-    <div class="b2b-split">
-      <div class="b2b-block">
-        <h2>🏢 SEDE</h2>
-        <div class="container" id="top3B2bSede"></div>
-        <table>
-          <thead><tr>
-            <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
-            <th>IA</th><th>Pós</th><th>Total</th>
-          </tr></thead>
-          <tbody id="tabelaB2bSede"></tbody>
-        </table>
+    <h1>TIME B2B</h1>
+    <div class="container" style="flex-wrap: nowrap; justify-content: center; gap: 20px;">
+      <div class="card" style="width: 200px; padding: 15px;">
+        <img src="imagens/fabricio.png">
+        <div class="nome">Fabricio</div>
+        <div class="cargo">B2B SEDE</div>
       </div>
-      <div class="b2b-block">
-        <h2>📍 POLO</h2>
-        <div class="container" id="top3B2bPolo"></div>
-        <table>
-          <thead><tr>
-            <th>Consultor</th><th>Presencial</th><th>EAD</th><th>Semi</th>
-            <th>IA</th><th>Pós</th><th>Total</th>
-          </tr></thead>
-          <tbody id="tabelaB2bPolo"></tbody>
-        </table>
+      <div class="card" style="width: 200px; padding: 15px;">
+        <img src="imagens/inara.png">
+        <div class="nome">Inara</div>
+        <div class="cargo">B2B POLOS</div>
       </div>
     </div>
   </div>
@@ -394,19 +382,14 @@
     <div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div>
   </div>
 
-  <!-- Slide 5: Coordenadores -->
+  <!-- Slide 5: Coordenador -->
   <div class="slide" id="slide5">
-    <h1>Coordenadores</h1>
+    <h1>Coordenador</h1>
     <div class="container">
       <div class="card">
         <img src="imagens/tom.png">
         <div class="nome">Tom</div>
-        <div class="cargo">Coordenador Time Externo</div>
-      </div>
-      <div class="card">
-        <img src="imagens/mary.png">
-        <div class="nome">Mary</div>
-        <div class="cargo">Coordenadora Time Interno</div>
+        <div class="cargo">Coordenador Comercial</div>
       </div>
     </div>
   </div>
@@ -414,63 +397,21 @@
   <!-- Slide 6: Supervisores -->
   <div class="slide" id="slide6">
     <h1>Supervisores</h1>
-    <div class="container" style="flex-wrap: nowrap; justify-content: center; gap: 10px;">
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/vanessa.png">
-        <div class="nome">Vanessa</div>
-        <div class="cargo">Supervisora - Interno</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/raffa.png">
-        <div class="nome">Raffaela</div>
-        <div class="cargo">Supervisora - Interno</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/juliana.png">
-        <div class="nome">Juliana</div>
-        <div class="cargo">Supervisora - Interno</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
-        <img src="imagens/erica.png">
-        <div class="nome">Erica</div>
-        <div class="cargo">Supervisora - Externo</div>
-      </div>
-      <div class="card" style="width: 180px; padding: 15px;">
+    <div class="container" style="flex-wrap: nowrap; justify-content: center; gap: 20px;">
+      <div class="card" style="width: 200px; padding: 15px;">
         <img src="imagens/vanessafaria.png">
         <div class="nome">Vanessa Faria</div>
-        <div class="cargo">Supervisora - Externo</div>
+        <div class="cargo">Supervisora Comercial Sede</div>
       </div>
-      <div class="card" style="width: 180px; padding: 15px;">
+      <div class="card" style="width: 200px; padding: 15px;">
         <img src="imagens/dg.png">
         <div class="nome">DG</div>
-        <div class="cargo">Supervisor EAD - BRASIL</div>
+        <div class="cargo">Supervisor Comercial Hunters</div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 7: Líderes -->
-  <div class="slide" id="slide8">
-    <h1>Líderes</h1>
-    <div class="container">
-      <div class="card">
-        <img src="imagens/lidya.png">
-        <div class="nome">Lidya</div>
-        <div class="cargo">Líder Comercial</div>
-      </div>
-      <div class="card">
-        <img src="imagens/pedro.png">
-        <div class="nome">Pedro</div>
-        <div class="cargo">Líder Externo</div>
-      </div>
-      <div class="card">
-        <img src="imagens/beatriz.png">
-        <div class="nome">Beatriz</div>
-        <div class="cargo">Líder Externo</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 8: Ranking Geral -->
+  <!-- Slide 7: Ranking Geral -->
   <div class="slide" id="slide9">
     <h1>Ranking Geral Quinzena</h1>
     <table>
@@ -681,22 +622,6 @@
       document.getElementById("top3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
       document.getElementById("top3EadBrasil").className = "top3-container";
       document.getElementById("tabelaTop3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map(criarLinha).join('');
-
-      // ==== B2B — SEDE e POLO lado a lado ====
-      const b2bSede = dados
-        .filter(d => tipoNormalizado(d) === "SEDE B2B")
-        .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
-      const b2bPolo = dados
-        .filter(d => tipoNormalizado(d) === "POLO B2B")
-        .sort((a,b) => (parseInt(b["TOTAL GERAL"] || 0)) - (parseInt(a["TOTAL GERAL"] || 0)));
-
-      document.getElementById("top3B2bSede").innerHTML = b2bSede.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
-      document.getElementById("top3B2bSede").className = "top3-container";
-      document.getElementById("tabelaB2bSede").innerHTML = b2bSede.slice(0, 3).map(criarLinha).join('');
-
-      document.getElementById("top3B2bPolo").innerHTML = b2bPolo.slice(0, 3).map((d,i) => criarCard(d, i+1)).join('');
-      document.getElementById("top3B2bPolo").className = "top3-container";
-      document.getElementById("tabelaB2bPolo").innerHTML = b2bPolo.slice(0, 3).map(criarLinha).join('');
 
       // ==== Slider TODOS os consultores ====
       const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
