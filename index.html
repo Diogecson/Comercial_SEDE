@@ -281,15 +281,16 @@
     @media (max-width: 500px) { .captacao-grid { grid-template-columns: 1fr; } }
 
     /* ============================================================
-       Slider "Todos os Consultores"
+       Slider "Todos os Consultores" — Internos em cima / EAD Brasil embaixo
        ============================================================ */
     .slider-container {
       overflow: hidden;
       position: relative;
-      height: 280px;
+      height: 270px;
     }
     .slider-track {
       display: flex;
+      width: max-content;          /* faz o loop girar pela largura real dos cards */
       animation: scrollSlider 40s linear infinite;
     }
     .slider-track img {
@@ -303,6 +304,21 @@
     @keyframes scrollSlider {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+
+    .grupo-titulo {
+      margin: 4px 0 8px;
+      font-size: 20px;
+      color: cyan;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      text-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    .divisor-grupos {
+      height: 2px;
+      width: 90%;
+      margin: 4px auto 10px;
+      background: linear-gradient(90deg, transparent, rgba(0,191,255,0.8), transparent);
     }
 
     .total { font-size: 20px; margin-top: 10px; color: cyan; }
@@ -498,10 +514,16 @@
     </div>
   </div>
 
-  <!-- Slide 4: Todos os Consultores -->
+  <!-- Slide 4: Todos os Consultores (Internos em cima / EAD Brasil embaixo) -->
   <div class="slide" id="slide4">
     <h1>Todos os Consultores</h1>
+
+    <h2 class="grupo-titulo">Consultores Internos</h2>
     <div class="slider-container"><div class="slider-track" id="linha1"></div></div>
+
+    <div class="divisor-grupos"></div>
+
+    <h2 class="grupo-titulo">EAD Brasil</h2>
     <div class="slider-container"><div class="slider-track reverse" id="linha2"></div></div>
   </div>
 
@@ -609,6 +631,24 @@
       const total = d["TOTAL GERAL"];
       const nomeImg = normalizarNome(nome);
       return `<div class="consultor-card"><img src="imagens/${nomeImg}.png"><div class="nome">${nome}</div><div class="total">Total: ${total}</div></div>`;
+    }
+
+    // Monta uma faixa do carrossel. Se o grupo tiver poucas pessoas, repete os cards
+    // para ocupar a tela toda e o loop não abrir um buraco.
+    function montarSlider(idTrack, lista) {
+      const track = document.getElementById(idTrack);
+      if (!lista.length) {
+        track.innerHTML = '<div style="padding:40px;opacity:.6">Nenhum consultor neste grupo</div>';
+        track.style.animation = 'none';
+        return;
+      }
+      const base = lista.map(criarCardSimples);
+      let bloco = [];
+      while (bloco.length < 10) bloco = bloco.concat(base);
+      const html = bloco.join('');
+      track.innerHTML = html + html;
+      track.style.animation = '';
+      track.style.animationDuration = (bloco.length * 4) + 's'; // mesma velocidade nas duas faixas
     }
 
     function criarLinha(d) {
@@ -765,11 +805,9 @@
       document.getElementById("top3EadBrasil").className = "top3-container";
       document.getElementById("tabelaTop3EadBrasil").innerHTML = eadBrasil.slice(0, 3).map(criarLinha).join('');
 
-      // ==== Slider TODOS os consultores ====
-      const linha1 = dados.slice(0, Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
-      const linha2 = dados.slice(Math.ceil(dados.length / 2)).map(criarCardSimples).join('');
-      document.getElementById("linha1").innerHTML = linha1 + linha1;
-      document.getElementById("linha2").innerHTML = linha2 + linha2;
+      // ==== Slider: Internos (cima) / EAD Brasil (baixo) ====
+      montarSlider("linha1", internos);
+      montarSlider("linha2", eadBrasil);
 
       // ==== Captação por modalidade (soma todas as colunas) ====
       const soma = (col) => dados.reduce((acc, d) => acc + (parseInt(d[col]) || 0), 0);
@@ -890,8 +928,9 @@
 
     function iniciarAutoPlay() {
       if (intervalId) clearTimeout(intervalId);
-      // Slide 4 (Todos os Consultores) fica 20s; demais 10s
-      const delay = slideAtual === 4 ? 20000 : 10000;
+      // Slide "Todos os Consultores" fica 20s; demais 10s
+      const slideEl = slides[slideAtual - 1];
+      const delay = (slideEl && slideEl.id === "slide4") ? 20000 : 10000;
       intervalId = setTimeout(() => { if (autoPlay) proximoSlide(); }, delay);
     }
 
